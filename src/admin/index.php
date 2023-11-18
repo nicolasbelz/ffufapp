@@ -1,4 +1,5 @@
 // admin/index.php
+<?php include '../header.php'; ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,3 +12,4 @@
     <a href="users/">Manage Users</a>
 </body>
 </html>
+<?php include '../footer.php'; ?>

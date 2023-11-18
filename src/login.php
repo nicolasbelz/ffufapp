@@ -1,3 +1,4 @@
+<?php include 'header.php'; ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,3 +13,4 @@
     </form>
 </body>
 </html>
+<?php include 'footer.php'; ?>

@@ -1,3 +1,4 @@
+<?php include '../header.php'; ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,3 +9,4 @@
     <p>Settings management interface...</p>
 </body>
 </html>
+<?php include '../footer.php'; ?>
