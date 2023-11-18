@@ -1,0 +1,24 @@
+body {
+    background-color: #121212; /* Dark background for the theme */
+    color: #f5f5f5; /* Light text for readability */
+    font-family: 'Roboto', sans-serif; /* Modern font */
+    margin: 0;
+    padding-top: 50px; /* To avoid overlap with the fixed navbar */
+}
+
+h1 {
+    color: #58a6ff; /* Hack The Box blue for headings */
+}
+
+p {
+    color: #c9d1d9; /* Slightly off-white for paragraphs */
+}
+
+a {
+    color: #58a6ff; /* Links color similar to Hack The Box */
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
