@@ -1,4 +1,5 @@
-// about/index.php
+<?php include '../header.php'; // Include the header from the parent directory ?>
+<!-- About page content -->
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,3 +12,4 @@
     <a href="history.php">Our History</a>
 </body>
 </html>
+<?php include '../footer.php'; ?>
