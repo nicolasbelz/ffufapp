@@ -2,7 +2,7 @@
 <html>
 <head>
     <title>Vulnerable Web App</title>
-    <link rel="stylesheet" type="text/css" href="styles.css">
+    <link rel="stylesheet" type="text/css" href="css/styles.css"> <!-- Updated path -->
 </head>
 <body>
     <div id="navbar">

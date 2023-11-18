@@ -1,0 +1,63 @@
+/* General body styling */
+body {
+    background-color: #121212; /* Dark background */
+    color: #e0e0e0; /* Light text */
+    font-family: 'Consolas', 'Monaco', 'Courier New', monospace; /* Monospace font common in coding */
+    margin: 0;
+    padding: 0;
+}
+
+/* Navbar styling */
+#navbar {
+    background-color: #1e1e1e; /* Slightly lighter dark shade for the navbar */
+    overflow: hidden;
+}
+
+#navbar ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+#navbar li {
+    float: left;
+}
+
+#navbar li a {
+    display: block;
+    color: #19FF19; /* Matrix green text for links */
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 1.1em; /* Slightly larger font size for better readability */
+}
+
+/* Change link color on hover */
+#navbar li a:hover {
+    background-color: #333;
+    color: #0F0; /* Brighter Matrix green on hover */
+}
+
+/* Headings */
+h1 {
+    background-color: #1a1a1a; /* Dark shade for heading background */
+    color: #19FF19; /* Matrix green for headings */
+    padding: 20px;
+    margin-top: 0; /* Remove default margin */
+}
+
+/* Paragraphs */
+p {
+    padding: 0 20px;
+}
+
+/* Additional elements you may want to style */
+a:link, a:visited {
+    color: #19FF19; /* Matrix green for links */
+}
+
+a:hover, a:active {
+    color: #0F0; /* Brighter Matrix green for links hover */
+}
+
+/* Style other elements like forms, tables, buttons, etc. as needed */
