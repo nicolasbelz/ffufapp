@@ -20,3 +20,10 @@ images
 config
 database
 system
+sql_injection
+xss_vulnerable
+directory_listing
+file_inclusion
+main
+style
+level1
