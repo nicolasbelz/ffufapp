@@ -10,31 +10,23 @@
    - [Parameter Fuzzing for GET and POST Requests](#get_post_fuzzing)
      * [GET Parameter fuzzing:](#get_requests)
      * [POST Parameter fuzzing:](#post_requests)
-5. [License](#license))
+   - [Value Fuzzing](#value_fuzzing)
+5. [License](#license)
 
 ## Introduction
 Content for the introduction section.
-
+---
 ## Requirements
 Instructions on how to use the application.
-
+---
 ## Installation
 Steps for installing the application.
-
+---
 ## Usage
-Guidelines for contributing to the project.
-
-## License
-License information for the project.
-
-
-
-
-
-## Description of the Testing Techniques Used
+Guidelines and description of the testing techniques used in this project.
 
 The penetration testing process with `ffuf` employs a structured methodology, leveraging the `FUZZ` keyword to probe different aspects of a web application. Below is an in-depth analysis of each technique used:
----
+
 ### Directory Fuzzing
 This technique tests for directory names, seeking to uncover unsecured folders that could contain sensitive information. FUZZ acts as a placeholder for directory names within the URL path, and each entry from list.txt replaces FUZZ to test different directory combinations.
 
@@ -45,7 +37,7 @@ Correct payload:
 </div>
 
 Focuses on discovering accessible PHP files by iterating through potential file names with the `.php` extension.
----
+
 ### Page Fuzzing
 Page fuzzing focuses on discovering accessible PHP files. The .php extension is fixed, and FUZZ iterates through potential file names. This could expose scripts that are unprotected or provide more information on the server's structure.
 
@@ -58,7 +50,7 @@ Correct payload:
 
 
 Focuses on discovering accessible PHP files by iterating through potential file names with the `.php` extension.
----
+
 ### Directory and Page Fuzzing with Extensions
 Here, the -e flag extends the fuzzing to include file extensions, effectively searching for files of a particular type. The -v flag provides verbose output, offering full URLs and redirection paths, which aids in detailed analysis of the application's response.
 
@@ -78,7 +70,7 @@ ffuf -w list.txt:FUZZ -u http://localhost/FUZZ -e .php -v -->
 
 
 Includes file extensions in fuzzing and provides verbose output with `-e` and `-v` flags for detailed analysis.
----
+
 ### Recursive Fuzzing
 Recursive fuzzing delves into directories found during the initial fuzzing. The -recursion-depth flag determines how many levels deep ffuf will go. This is crucial for uncovering nested directories that could lead to deeper vulnerabilities.
 
@@ -98,7 +90,7 @@ ffuf -w list.txt:FUZZ -u http://localhost/FUZZ -recursion -recursion-depth 3 -e 
 
 
 Delves into directories found during initial fuzzing, with `-recursion-depth` controlling the levels of depth.
----
+
 ### Parameter Fuzzing for GET and POST Requests
 Parameter fuzzing examines how the application processes query strings in GET requests and data payloads in POST requests. By altering the key parameter, we can identify how the application responds to various inputs. The -mc flag filters out all responses except those with specific status codes, such as 200, indicating a successful hit.
 
@@ -109,6 +101,7 @@ Correct payload:
 <pre><code>fffuf -w parameters.txt:FUZZ -u http://localhost/admin/index.php?key=FUZZ</code></pre>
 <button class="copy-button" onclick="copyToClipboard('ffuf -w parameters.txt:FUZZ -u http://localhost/admin/index.php?key=FUZZ')"></button>
 </div>
+
 Correct payload listing only response codes 200:
 <div class="code-snippet">
 <pre><code>fffuf -w parameters.txt:FUZZ -u http://localhost/admin/index.php?key=FUZZ -mc 200</code></pre>
@@ -128,7 +121,7 @@ Correct payload:
 
 
 Examines the application's processing of query strings in GET requests and data payloads in POST requests. `-mc` flag is used to filter responses by status codes.
----
+
 ### Value Fuzzing
 Value fuzzing tests for valid identifiers or keys. It can reveal the correct handling of expected data and expose how the application responds to valid versus invalid data. The -mc 200 flag is used to filter responses and list only the correct IDs or keys that return a successful HTTP status.
 
@@ -152,9 +145,11 @@ Correct payload:
 
 Tests for valid identifiers or keys to reveal correct data handling and the application's response to valid versus invalid data.
 
----
+
 Each method is crafted to test for different vulnerabilities, with the placement of `FUZZ` designed to mimic attacker actions and ensure comprehensive coverage of common attack vectors.
 
----
----
+
 This README provides a clear guide to using ffuf for penetration testing, including detailed code snippets for each type of fuzzing technique
+
+## License
+License information for the project.
