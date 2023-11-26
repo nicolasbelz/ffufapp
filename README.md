@@ -3,6 +3,7 @@
 2. [Requirements](#requirements)
 3. [Installation](#installation)
 4. [Usage](#usage)
+  4.1 [Directory Fuzzing](##directory_fuzzing)
 5. [License](#license)
 
 ## Introduction
