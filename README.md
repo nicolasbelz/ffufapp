@@ -21,7 +21,7 @@ Page fuzzing focuses on discovering accessible PHP files. The .php extension is 
 Correct payload:
 <div class="code-snippet">
 <pre><code>ffuf -w list.txt:FUZZ -u http://localhost/FUZZ.php</code></pre>
-<button class="copy-button" onclick="copyToClipboard('ffuf -w list.txt:FUZZ -u http://localhost/FUZZ.php')">Copy</button>
+<button class="copy-button" onclick="copyToClipboard('ffuf -w list.txt:FUZZ -u http://localhost/FUZZ.php')"></button>
 </div>
 
 
@@ -34,12 +34,12 @@ Here, the -e flag extends the fuzzing to include file extensions, effectively se
 Correct payload:
 <div class="code-snippet">
 <pre><code>fffuf -w list.txt:FUZZ -u http://localhost/FUZZ -e .php</code></pre>
-<button class="copy-button" onclick="copyToClipboard('fffuf -w list.txt:FUZZ -u http://localhost/FUZZ -e .php')">Copy</button>
+<button class="copy-button" onclick="copyToClipboard('fffuf -w list.txt:FUZZ -u http://localhost/FUZZ -e .php')"></button>
 </div>
 Correct payload with verbose output:
 <div class="code-snippet">
 <pre><code>fffuf -w list.txt:FUZZ -u http://localhost/FUZZ -e .php -v</code></pre>
-<button class="copy-button" onclick="copyToClipboard('fffuf -w list.txt:FUZZ -u http://localhost/FUZZ -e .php -v')">Copy</button>
+<button class="copy-button" onclick="copyToClipboard('fffuf -w list.txt:FUZZ -u http://localhost/FUZZ -e .php -v')"></button>
 </div>
 
 <!-- ffuf -w list.txt:FUZZ -u http://localhost/FUZZ -e .php
@@ -54,13 +54,13 @@ Recursive fuzzing delves into directories found during the initial fuzzing. The 
 Correct payload with depth level 2:
 <div class="code-snippet">
 <pre><code>fuf -w list.txt:FUZZ -u http://localhost/FUZZ -recursion -recursion-depth 2</code></pre>
-<button class="copy-button" onclick="copyToClipboard('fuf -w list.txt:FUZZ -u http://localhost/FUZZ -recursion -recursion-depth 2')">Copy</button>
+<button class="copy-button" onclick="copyToClipboard('fuf -w list.txt:FUZZ -u http://localhost/FUZZ -recursion -recursion-depth 2')"></button>
 </div>
 
 Correct payload with depth level 3 and other options:
 <div class="code-snippet">
 <pre><code>fuf -w list.txt:FUZZ -u http://localhost/FUZZ -recursion -recursion-depth 3 -e .php</code></pre>
-<button class="copy-button" onclick="copyToClipboard('fuf -w list.txt:FUZZ -u http://localhost/FUZZ -recursion -recursion-depth 3 -e .php')">Copy</button>
+<button class="copy-button" onclick="copyToClipboard('fuf -w list.txt:FUZZ -u http://localhost/FUZZ -recursion -recursion-depth 3 -e .php')"></button>
 </div>
 <!-- fuf -w list.txt:FUZZ -u http://localhost/FUZZ -recursion -recursion-depth 2
 ffuf -w list.txt:FUZZ -u http://localhost/FUZZ -recursion -recursion-depth 3 -e .php -->
@@ -76,12 +76,12 @@ GET Parameter fuzzing:
 Correct payload:
 <div class="code-snippet">
 <pre><code>fffuf -w parameters.txt:FUZZ -u http://localhost/admin/index.php?key=FUZZ</code></pre>
-<button class="copy-button" onclick="copyToClipboard('ffuf -w parameters.txt:FUZZ -u http://localhost/admin/index.php?key=FUZZ')">Copy</button>
+<button class="copy-button" onclick="copyToClipboard('ffuf -w parameters.txt:FUZZ -u http://localhost/admin/index.php?key=FUZZ')"></button>
 </div>
 Correct payload listing only response codes 200:
 <div class="code-snippet">
 <pre><code>fffuf -w parameters.txt:FUZZ -u http://localhost/admin/index.php?key=FUZZ -mc 200</code></pre>
-<button class="copy-button" onclick="copyToClipboard('ffuf -w parameters.txt:FUZZ -u http://localhost/admin/index.php?key=FUZZ -mc 200')">Copy</button>
+<button class="copy-button" onclick="copyToClipboard('ffuf -w parameters.txt:FUZZ -u http://localhost/admin/index.php?key=FUZZ -mc 200')"></button>
 </div>
 <!-- ffuf -w parameters.txt:FUZZ -u http://localhost/admin/index.php?key=FUZZ
 ffuf -w parameters.txt:FUZZ -u http://localhost/admin/index.php?key=FUZZ -mc 200 -->
@@ -91,7 +91,7 @@ POST Parameter fuzzing:
 Correct payload:
 <div class="code-snippet">
 <pre><code>ffuf -w parameters.txt:FUZZ -u http://localhost/admin/index.php -X POST -d 'key=FUZZ' -H 'Content-Type: application/x-www-form-urlencoded'</code></pre>
-<button class="copy-button" onclick="copyToClipboard('ffuf -w parameters.txt:FUZZ -u http://localhost/admin/index.php -X POST -d 'key=FUZZ' -H 'Content-Type: application/x-www-form-urlencoded')">Copy</button>
+<button class="copy-button" onclick="copyToClipboard('ffuf -w parameters.txt:FUZZ -u http://localhost/admin/index.php -X POST -d 'key=FUZZ' -H 'Content-Type: application/x-www-form-urlencoded')"></button>
 </div>
 <!-- ffuf -w parameters.txt:FUZZ -u http://localhost/admin/index.php -X POST -d 'key=FUZZ' -H 'Content-Type: application/x-www-form-urlencoded' -->
 
@@ -105,7 +105,7 @@ Correct ID listing:
 Correct payload:
 <div class="code-snippet">
 <pre><code>ffuf -w ids.txt:FUZZ -u http://localhost/admin/flagvalue.php -X POST -d 'id=FUZZ' -H 'Content-Type: application/x-www-form-urlencoded' -mc 200</code></pre>
-<button class="copy-button" onclick="copyToClipboard('ffuf -w ids.txt:FUZZ -u http://localhost/admin/flagvalue.php -X POST -d 'id=FUZZ' -H 'Content-Type: application/x-www-form-urlencoded' -mc 200')">Copy</button>
+<button class="copy-button" onclick="copyToClipboard('ffuf -w ids.txt:FUZZ -u http://localhost/admin/flagvalue.php -X POST -d 'id=FUZZ' -H 'Content-Type: application/x-www-form-urlencoded' -mc 200')"></button>
 </div>
 <!-- ffuf -w ids.txt:FUZZ -u http://localhost/admin/flagvalue.php -X POST -d 'id=FUZZ' -H 'Content-Type: application/x-www-form-urlencoded' -mc 200 -->
 
@@ -114,7 +114,7 @@ Complete listing:
 Correct payload:
 <div class="code-snippet">
 <pre><code>ffuf -w ids.txt:FUZZ -u http://localhost/admin/flagvalue.php -X POST -d 'id=FUZZ' -H 'Content-Type: application/x-www-form-urlencoded'</code></pre>
-<button class="copy-button" onclick="copyToClipboard('ffuf -w ids.txt:FUZZ -u http://localhost/admin/flagvalue.php -X POST -d 'id=FUZZ' -H 'Content-Type: application/x-www-form-urlencoded')">Copy</button>
+<button class="copy-button" onclick="copyToClipboard('ffuf -w ids.txt:FUZZ -u http://localhost/admin/flagvalue.php -X POST -d 'id=FUZZ' -H 'Content-Type: application/x-www-form-urlencoded')"></button>
 </div>
 <!-- ffuf -w ids.txt:FUZZ -u http://localhost/admin/flagvalue.php -X POST -d 'id=FUZZ' -H 'Content-Type: application/x-www-form-urlencoded' -->
 
