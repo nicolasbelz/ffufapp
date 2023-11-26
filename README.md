@@ -10,7 +10,7 @@ This technique tests for directory names, seeking to uncover unsecured folders t
 Correct payload:
 <div class="code-snippet">
 <pre><code>ffuf -w list.txt:FUZZ -u http://localhost/FUZZ</code></pre>
-<button class="copy-button" onclick="copyToClipboard('ffuf -w list.txt:FUZZ -u http://localhost/FUZZ')">Copy</button>
+<button class="copy-button" onclick="copyToClipboard('ffuf -w list.txt:FUZZ -u http://localhost/FUZZ')"></button>
 </div>
 
 Focuses on discovering accessible PHP files by iterating through potential file names with the `.php` extension.
