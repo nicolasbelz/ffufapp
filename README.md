@@ -3,8 +3,14 @@
 2. [Requirements](#requirements)
 3. [Installation](#installation)
 4. [Usage](#usage)
-  4.1 [Directory Fuzzing](##directory_fuzzing)
-5. [License](#license)
+   - [Directory Fuzzing](#directory_fuzzing)
+   - [Page Fuzzing](#page_fuzzing)
+   - [Directory and Page Fuzzing with Extensions](#directory__page_fuzzing)
+   - [Recursive Fuzzing](#recursive_fuzzing)
+   - [Parameter Fuzzing for GET and POST Requests](#get_post_fuzzing)
+     * [GET Parameter fuzzing:](#get_requests)
+     * [POST Parameter fuzzing:](#post_requests)
+5. [License](#license))
 
 ## Introduction
 Content for the introduction section.
@@ -97,7 +103,7 @@ Delves into directories found during initial fuzzing, with `-recursion-depth` co
 Parameter fuzzing examines how the application processes query strings in GET requests and data payloads in POST requests. By altering the key parameter, we can identify how the application responds to various inputs. The -mc flag filters out all responses except those with specific status codes, such as 200, indicating a successful hit.
 
 
-GET Parameter fuzzing:
+#### GET Parameter fuzzing:
 Correct payload:
 <div class="code-snippet">
 <pre><code>fffuf -w parameters.txt:FUZZ -u http://localhost/admin/index.php?key=FUZZ</code></pre>
@@ -112,7 +118,7 @@ Correct payload listing only response codes 200:
 ffuf -w parameters.txt:FUZZ -u http://localhost/admin/index.php?key=FUZZ -mc 200 -->
 
 
-POST Parameter fuzzing:
+#### POST Parameter fuzzing:
 Correct payload:
 <div class="code-snippet">
 <pre><code>ffuf -w parameters.txt:FUZZ -u http://localhost/admin/index.php -X POST -d 'key=FUZZ' -H 'Content-Type: application/x-www-form-urlencoded'</code></pre>
