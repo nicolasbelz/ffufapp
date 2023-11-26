@@ -5,7 +5,12 @@
 The penetration testing process with `ffuf` employs a structured methodology, leveraging the `FUZZ` keyword to probe different aspects of a web application. Below is an in-depth analysis of each technique used:
 
 ### Directory Fuzzing
-ffuf -w list.txt:FUZZ -u http://localhost/FUZZ
+<div class="code-snippet">
+<pre><code>ffuf -w list.txt:FUZZ -u http://localhost/FUZZ</code></pre>
+<button class="copy-button" onclick="copyToClipboard('ffuf -w list.txt:FUZZ -u http://localhost/FUZZ')">Copy</button>
+</div>
+
+
 
 
 Tests for directory names to uncover potentially unsecured folders containing sensitive information. `FUZZ` is a placeholder within the URL path, replaced by each entry from `list.txt`.
@@ -61,3 +66,17 @@ Each method is crafted to test for different vulnerabilities, with the placement
 
 This README provides a clear guide to using ffuf for penetration testing, including detailed code snippets for each type of fuzzing technique
 
+<script>
+function copyToClipboard(text) {
+  var dummy = document.createElement("textarea");
+  // to avoid breaking orgain page when copying more words
+  // cant copy when adding below this code
+  // dummy.style.display = 'none'
+  document.body.appendChild(dummy);
+  // Be careful if you use `line1\nline2`, as using `\n` in a string will be counted as two characters!
+  dummy.value = text;
+  dummy.select();
+  document.execCommand("copy");
+  document.body.removeChild(dummy);
+}
+</script>
