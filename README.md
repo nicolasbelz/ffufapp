@@ -15,13 +15,13 @@
 
 ## Introduction
 Content for the introduction section.
----
+
 ## Requirements
 Instructions on how to use the application.
----
+
 ## Installation
 Steps for installing the application.
----
+
 ## Usage
 Guidelines and description of the testing techniques used in this project.
 
