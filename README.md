@@ -1,7 +1,12 @@
 # Penetration Testing Techniques with ffuf lab
 1. [Introduction](#introduction)
 2. [Requirements](#requirements)
+   - [Update your machine](#update-your-machine)
+   - [Install docker](#install-docker)
+   - [Install docker-compose](#install-docker-compose)
 3. [Installation](#installation)
+   - [Clone git repository](#clone-git-repository)
+   - [Start lab environment](#start-lab-environment)
 4. [Usage](#usage)
    - [Directory Fuzzing](#directory-fuzzing)
    - [Page Fuzzing](#page_fuzzing)
@@ -21,10 +26,95 @@ Content for the introduction section.
 ## Requirements
 Instructions on how to use the application.
 
+### Update your machine
+Update your linux machine with this command:
+<div class="code-snippet">
+<pre><code>sudo apt update</code></pre>
+<button class="copy-button" onclick="copyToClipboard('sudo apt update')"></button>
+</div>
+
+If needed upgrade your linux machine with this command:
+<div class="code-snippet">
+<pre><code>sudo apt upgrade</code></pre>
+<button class="copy-button" onclick="copyToClipboard('sudo apt upgrade')"></button>
+</div>
+
+### Install docker
+Install docker with this command
+<div class="code-snippet">
+<pre><code>sudo apt install -y docker.io</code></pre>
+<button class="copy-button" onclick="copyToClipboard('sudo apt install -y docker.io')"></button>
+</div>
+
+You can skip this step if you have the requirement already instaled.
+Check the docker version with this command:
+<div class="code-snippet">
+<pre><code>docker-compose --version</code></pre>
+<button class="copy-button" onclick="copyToClipboard('docker-compose --version')"></button>
+</div>
+
+### Install docker-compose
+Install docker-compose on your machine with this command:
+<div class="code-snippet">
+<pre><code>sudo wget "https://github.com/docker/compose/releases/download/v2.23.1/docker-compose-$(uname -s)-$(uname -m)" -O /usr/local/bin/docker-compose</code></pre>
+<button class="copy-button" onclick="copyToClipboard('sudo wget "https://github.com/docker/compose/releases/download/v2.23.1/docker-compose-$(uname -s)-$(uname -m)" -O /usr/local/bin/docker-compose')"></button>
+</div>
+
+Test docker installation by running this command:
+<div class="code-snippet">
+<pre><code>docker run hello-world</code></pre>
+<button class="copy-button" onclick="copyToClipboard('docker run hello-world')"></button>
+</div>
+
+You can skip this step if you have the requirement already instaled.
+Check the docker version with this command:
+<div class="code-snippet">
+<pre><code>docker-compose --version</code></pre>
+<button class="copy-button" onclick="copyToClipboard('docker-compose --version')"></button>
+</div>
+
+Change access permissions to executable with this command:
+<div class="code-snippet">
+<pre><code>sudo chmod +x /usr/local/bin/docker-compose</code></pre>
+<button class="copy-button" onclick="copyToClipboard('sudo chmod +x /usr/local/bin/docker-compose')"></button>
+</div>
+
 ---
 
 ## Installation
-Steps for installing the application.
+Steps for installing and running the web application.
+
+### Clone git repository
+Clone the project from the github repository to your direcotry on your linux machine using this command:
+<div class="code-snippet">
+<pre><code>sudo git clone https://github.com/nicolasbelz/webapp.git</code></pre>
+<button class="copy-button" onclick="copyToClipboard('sudo git clone https://github.com/nicolasbelz/webapp.git')"></button>
+</div>
+
+### Start lab environment
+Open the terminal in the cloned project directory and start the web application using this command:
+<div class="code-snippet">
+<pre><code>sudo docker-compose up -d</code></pre>
+<button class="copy-button" onclick="copyToClipboard('sudo docker-compose up -d')"></button>
+</div>
+
+Access the web application on your browser via 'localhost':
+<div class="code-snippet">
+<pre><code>http://localhost</code></pre>
+<button class="copy-button" onclick="copyToClipboard('http://localhost')"></button>
+</div>
+
+If the web application is not accessible check if docker is enabled by running this command:
+<div class="code-snippet">
+<pre><code>sudo systemctl status docker</code></pre>
+<button class="copy-button" onclick="copyToClipboard('sudo systemctl status docker')"></button>
+</div>
+
+Restart docker if needed by running this command:
+<div class="code-snippet">
+<pre><code>sudo systemctl restart docker</code></pre>
+<button class="copy-button" onclick="copyToClipboard('sudo systemctl restart docker')"></button>
+</div>
 
 ---
 
@@ -46,7 +136,7 @@ Correct payload:
 
 Focuses on discovering accessible PHP files by iterating through potential file names with the `.php` extension.
 
-
+ 
 ---
 
 ### Page Fuzzing
