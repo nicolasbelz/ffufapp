@@ -235,8 +235,7 @@ Examines the application's processing of query strings in GET requests and data 
 ### Value Fuzzing
 Value fuzzing tests for valid identifiers or keys. It can reveal the correct handling of expected data and expose how the application responds to valid versus invalid data. The -mc 200 flag is used to filter responses and list only the correct IDs or keys that return a successful HTTP status.
 
-Correct ID listing:
-Correct payload:
+Correct payload to list the specific ID:
 <div class="code-snippet">
 <pre><code>ffuf -w ids.txt:FUZZ -u http://localhost/admin/flagvalue.php -X POST -d 'id=FUZZ' -H 'Content-Type: application/x-www-form-urlencoded' -mc 200</code></pre>
 <button class="copy-button" onclick="copyToClipboard('ffuf -w ids.txt:FUZZ -u http://localhost/admin/flagvalue.php -X POST -d 'id=FUZZ' -H 'Content-Type: application/x-www-form-urlencoded' -mc 200')"></button>
@@ -244,8 +243,7 @@ Correct payload:
 <!-- ffuf -w ids.txt:FUZZ -u http://localhost/admin/flagvalue.php -X POST -d 'id=FUZZ' -H 'Content-Type: application/x-www-form-urlencoded' -mc 200 -->
 
 
-Complete listing:
-Correct payload:
+To list all IDs:
 <div class="code-snippet">
 <pre><code>ffuf -w ids.txt:FUZZ -u http://localhost/admin/flagvalue.php -X POST -d 'id=FUZZ' -H 'Content-Type: application/x-www-form-urlencoded'</code></pre>
 <button class="copy-button" onclick="copyToClipboard('ffuf -w ids.txt:FUZZ -u http://localhost/admin/flagvalue.php -X POST -d 'id=FUZZ' -H 'Content-Type: application/x-www-form-urlencoded')"></button>
@@ -265,7 +263,8 @@ Correct payload:
 <button class="copy-button" onclick="copyToClipboard('ffuf -w cookie_values.txt -u http://localhost/user_session.php -H "Cookie: access_token=FUZZ" -v')"></button>
 </div>
 
-Check the response header with this curl command
+
+Check the response header with this curl command:
 <div class="code-snippet">
 <pre><code>curl -b "access_token=XJ92n%23k%403ZQ%218hT6v" http://localhost/user_session.php -v</code></pre>
 <button class="copy-button" onclick="copyToClipboard('curl -b "access_token=XJ92n%23k%403ZQ%218hT6v" http://localhost/user_session.php -v')"></button>
