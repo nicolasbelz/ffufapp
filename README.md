@@ -257,7 +257,8 @@ Tests for valid identifiers or keys to reveal correct data handling and the appl
 
 
 ### Cookie Fuzzing
-Cookie Injection Vulnerability Testing explores an application's response to manipulated cookie values. This method uncovers how the application behaves when presented with both legitimate and illegitimate cookie data. Using FFUF, we systematically can test various cookie values, focusing on the access_token cookie to access a restricted page (user_session.php)
+Cookie Injection Vulnerability Testing explores an application's response to manipulated cookie values. This method uncovers how the application behaves when presented with both legitimate and illegitimate cookie data. Using FFUF, we systematically can test various cookie values, focusing on the access_token cookie to access a restricted page in our case study thr user_session.php
+
 Correct payload:
 <div class="code-snippet">
 <pre><code>ffuf -w cookie_values.txt -u http://localhost/user_session.php -H "Cookie: access_token=FUZZ" -v</code></pre>
