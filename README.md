@@ -257,8 +257,7 @@ Tests for valid identifiers or keys to reveal correct data handling and the appl
 
 
 ### Cookie Fuzzing
-Value fuzzing tests for valid identifiers or keys. It can reveal the correct handling of expected data and expose how the application responds to valid versus invalid data. The -mc 200 flag is used to filter responses and list only the correct IDs or keys that return a successful HTTP status.
-
+Cookie Injection Vulnerability Testing explores an application's response to manipulated cookie values. This method uncovers how the application behaves when presented with both legitimate and illegitimate cookie data. Using FFUF, we systematically can test various cookie values, focusing on the access_token cookie to access a restricted page (user_session.php)
 Correct payload:
 <div class="code-snippet">
 <pre><code>ffuf -w cookie_values.txt -u http://localhost/user_session.php -H "Cookie: access_token=FUZZ" -v</code></pre>
