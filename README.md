@@ -17,6 +17,7 @@
      * [POST Parameter fuzzing](#get-parameter-fuzzing)
    - [Value Fuzzing](#value-fuzzing)
    - [Cookie Fuzzing](#cookie-fuzzing)
+   - [Token FUzzing](#token-fuzzing)
 5. [License](#license)
 
 ## Introduction
@@ -268,6 +269,15 @@ Check the response header with this curl command:
 <div class="code-snippet">
 <pre><code>curl -b "access_token=XJ92n%23k%403ZQ%218hT6v" http://localhost/user_session.php -v</code></pre>
 <button class="copy-button" onclick="copyToClipboard('curl -b "access_token=XJ92n%23k%403ZQ%218hT6v" http://localhost/user_session.php -v')"></button>
+</div>
+
+### Token Fuzzing
+Tests the security of custom HTTP header-based authentication mechanisms. By manipulating the header values using the option -H "X-Custom-Auth: FUZZ" we can inject different values from the wordlist into the X-Custom-Auth header. The FUZZ keyword is a placeholder that ffuf replaces with each line from tokens.txt., it assesses the application's response to both legitimate and illegitimate authentication attempts. Utilizing ffuf with the -H flag, various potential authentication tokens are tested. This methodology is effective in pinpointing weaknesses in the implementation of header-based authentication in web applications.
+
+Correct payload:
+<div class="code-snippet">
+<pre><code>ffuf -w tokens.txt -u http://localhost/header_auth.php -H "X-Custom-Auth: FUZZ"</code></pre>
+<button class="copy-button" onclick="copyToClipboard('ffuf -w tokens.txt -u http://localhost/header_auth.php -H "X-Custom-Auth: FUZZ"')"></button>
 </div>
 
 
