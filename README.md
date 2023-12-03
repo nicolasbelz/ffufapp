@@ -16,6 +16,7 @@
      * [GET Parameter fuzzing](#get-parameter-fuzzing)
      * [POST Parameter fuzzing](#get-parameter-fuzzing)
    - [Value Fuzzing](#value-fuzzing)
+   - [Cookie Fuzzing](#cookie-fuzzing)
 5. [License](#license)
 
 ## Introduction
@@ -253,6 +254,22 @@ Correct payload:
 
 
 Tests for valid identifiers or keys to reveal correct data handling and the application's response to valid versus invalid data.
+
+
+### Cookie Fuzzing
+Value fuzzing tests for valid identifiers or keys. It can reveal the correct handling of expected data and expose how the application responds to valid versus invalid data. The -mc 200 flag is used to filter responses and list only the correct IDs or keys that return a successful HTTP status.
+
+Correct payload:
+<div class="code-snippet">
+<pre><code>ffuf -w cookie_values.txt -u http://localhost/user_session.php -H "Cookie: access_token=FUZZ" -v</code></pre>
+<button class="copy-button" onclick="copyToClipboard('ffuf -w cookie_values.txt -u http://localhost/user_session.php -H "Cookie: access_token=FUZZ" -v')"></button>
+</div>
+
+Check the response header with this curl command
+<div class="code-snippet">
+<pre><code>curl -b "access_token=XJ92n%23k%403ZQ%218hT6v" http://localhost/user_session.php -v</code></pre>
+<button class="copy-button" onclick="copyToClipboard('curl -b "access_token=XJ92n%23k%403ZQ%218hT6v" http://localhost/user_session.php -v')"></button>
+</div>
 
 
 Each method is crafted to test for different vulnerabilities, with the placement of `FUZZ` designed to mimic attacker actions and ensure comprehensive coverage of common attack vectors.
