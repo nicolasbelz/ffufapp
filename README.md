@@ -18,6 +18,7 @@
    - [Value Fuzzing](#value-fuzzing)
    - [Cookie Fuzzing](#cookie-fuzzing)
    - [Token FUzzing](#token-fuzzing)
+   - [Custom Header Fuzzing](#custom-header-fuzzing)
 5. [License](#license)
 
 ## Introduction
@@ -278,6 +279,17 @@ Correct payload:
 <div class="code-snippet">
 <pre><code>ffuf -w tokens.txt -u http://localhost/header_auth.php -H "X-Custom-Auth: FUZZ"</code></pre>
 <button class="copy-button" onclick="copyToClipboard('ffuf -w tokens.txt -u http://localhost/header_auth.php -H "X-Custom-Auth: FUZZ"')"></button>
+</div>
+
+### Custom Header Fuzzing
+In the attack, we are testing the web application's response to different custom headers. The custom header is specified in the request, and FFuF replaces the "FUZZ" placeholder in the header with values from the wordlist. We defined different payloads in the request.txt file. Each payload represents a different scenario or input to test the application's response. For example, you are testing with different custom headers and POST data values. The request.txt file contains the HTTP requests to be sent. Each request block in the file represents a different test case, including the custom header and payload. The wordlist.txt file contains a list of potential values that FFuF will substitute for the "FUZZ" placeholder in the custom header. FFuF will test each value from the wordlist against the custom header.
+
+-request request.txt: Specifies the request file that contains the HTTP requests to be sent. Each request block in this file represents a different test case with various payloads.
+-u http://localhost/custom_header.php: Specifies the base URL of the target web application. In your case, it's a local server running on http://localhost
+Correct payload:
+<div class="code-snippet">
+<pre><code>ffuf -w wordlist.txt -request request.txt -u http://localhost/custom_header.php</code></pre>
+<button class="copy-button" onclick="copyToClipboard('ffuf -w wordlist.txt -request request.txt -u http://localhost/custom_header.php')"></button>
 </div>
 
 

@@ -8,3 +8,10 @@ style
 admin
 users
 level1
+admin
+testheader
+1234
+@#$%
+''; DROP TABLE users; --
+<script>alert('XSS')</script>
+longstringthatgoesonandonejusttotestbufferoverflows
