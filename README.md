@@ -163,13 +163,13 @@ Here, the -e flag extends the fuzzing to include file extensions, effectively se
 
 Correct payload:
 <div class="code-snippet">
-<pre><code>fffuf -w list.txt:FUZZ -u http://localhost/FUZZ -e .php</code></pre>
-<button class="copy-button" onclick="copyToClipboard('fffuf -w list.txt:FUZZ -u http://localhost/FUZZ -e .php')"></button>
+<pre><code>ffuf -w list.txt:FUZZ -u http://localhost/FUZZ -e .php</code></pre>
+<button class="copy-button" onclick="copyToClipboard('ffuf -w list.txt:FUZZ -u http://localhost/FUZZ -e .php')"></button>
 </div>
 Correct payload with verbose output:
 <div class="code-snippet">
-<pre><code>fffuf -w list.txt:FUZZ -u http://localhost/FUZZ -e .php -v</code></pre>
-<button class="copy-button" onclick="copyToClipboard('fffuf -w list.txt:FUZZ -u http://localhost/FUZZ -e .php -v')"></button>
+<pre><code>ffuf -w list.txt:FUZZ -u http://localhost/FUZZ -e .php -v</code></pre>
+<button class="copy-button" onclick="copyToClipboard('ffuf -w list.txt:FUZZ -u http://localhost/FUZZ -e .php -v')"></button>
 </div>
 
 <!-- ffuf -w list.txt:FUZZ -u http://localhost/FUZZ -e .php
@@ -215,7 +215,7 @@ Correct payload:
 
 Correct payload listing only response codes 200:
 <div class="code-snippet">
-<pre><code>fffuf -w parameters.txt:FUZZ -u http://localhost/admin/index.php?key=FUZZ -mc 200</code></pre>
+<pre><code>ffuf -w parameters.txt:FUZZ -u http://localhost/admin/index.php?key=FUZZ -mc 200</code></pre>
 <button class="copy-button" onclick="copyToClipboard('ffuf -w parameters.txt:FUZZ -u http://localhost/admin/index.php?key=FUZZ -mc 200')"></button>
 </div>
 <!-- ffuf -w parameters.txt:FUZZ -u http://localhost/admin/index.php?key=FUZZ
