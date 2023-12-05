@@ -300,6 +300,12 @@ Wrong command to test different output:
 <button class="copy-button" onclick="copyToClipboard('ffuf -w custom_header.txt -request wrong_request.txt -u http://localhost/custom_header.php')"></button>
 </div>
 
+Wrong command to test different output:
+<div class="code-snippet">
+<pre><code>ffuf -w custom_header.txt -request wrong_requestv2.txt -u http://localhost/custom_header.php</code></pre>
+<button class="copy-button" onclick="copyToClipboard('ffuf -w custom_header.txt -request wrong_requestv2.txt -u http://localhost/custom_header.php')"></button>
+</div>
+
 ---
 
 Each method is crafted to test for different vulnerabilities, with the placement of `FUZZ` designed to mimic attacker actions and ensure comprehensive coverage of common attack vectors.
