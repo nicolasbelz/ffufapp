@@ -185,14 +185,14 @@ Recursive fuzzing delves into directories found during the initial fuzzing. The 
 
 Correct payload with depth level 2:
 <div class="code-snippet">
-<pre><code>fuf -w list.txt:FUZZ -u http://localhost/FUZZ -recursion -recursion-depth 2</code></pre>
-<button class="copy-button" onclick="copyToClipboard('fuf -w list.txt:FUZZ -u http://localhost/FUZZ -recursion -recursion-depth 2')"></button>
+<pre><code>ffuf -w list.txt:FUZZ -u http://localhost/FUZZ -recursion -recursion-depth 2</code></pre>
+<button class="copy-button" onclick="copyToClipboard('ffuf -w list.txt:FUZZ -u http://localhost/FUZZ -recursion -recursion-depth 2')"></button>
 </div>
 
 Correct payload with depth level 3 and other options:
 <div class="code-snippet">
-<pre><code>fuf -w list.txt:FUZZ -u http://localhost/FUZZ -recursion -recursion-depth 3 -e .php</code></pre>
-<button class="copy-button" onclick="copyToClipboard('fuf -w list.txt:FUZZ -u http://localhost/FUZZ -recursion -recursion-depth 3 -e .php')"></button>
+<pre><code>ffuf -w list.txt:FUZZ -u http://localhost/FUZZ -recursion -recursion-depth 3 -e .php</code></pre>
+<button class="copy-button" onclick="copyToClipboard('ffuf -w list.txt:FUZZ -u http://localhost/FUZZ -recursion -recursion-depth 3 -e .php')"></button>
 </div>
 <!-- fuf -w list.txt:FUZZ -u http://localhost/FUZZ -recursion -recursion-depth 2
 ffuf -w list.txt:FUZZ -u http://localhost/FUZZ -recursion -recursion-depth 3 -e .php -->
