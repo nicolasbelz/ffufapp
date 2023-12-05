@@ -287,12 +287,20 @@ In the attack, we are testing the web application's response to different custom
 
 -request request.txt: Specifies the request file that contains the HTTP requests to be sent. Each request block in this file represents a different test case with various payloads.
 -u http://localhost/custom_header.php: Specifies the base URL of the target web application. In your case, it's a local server running on http://localhost
+
 Correct command:
 <div class="code-snippet">
 <pre><code>ffuf -w custom_header.txt -request request.txt -u http://localhost/custom_header.php</code></pre>
 <button class="copy-button" onclick="copyToClipboard('ffuf -w custom_header.txt -request request.txt -u http://localhost/custom_header.php')"></button>
 </div>
 
+Wrong command to test different output:
+<div class="code-snippet">
+<pre><code>ffuf -w custom_header.txt -request wrong_request.txt -u http://localhost/custom_header.php</code></pre>
+<button class="copy-button" onclick="copyToClipboard('ffuf -w custom_header.txt -request wrong_request.txt -u http://localhost/custom_header.php')"></button>
+</div>
+
+---
 
 Each method is crafted to test for different vulnerabilities, with the placement of `FUZZ` designed to mimic attacker actions and ensure comprehensive coverage of common attack vectors.
 
