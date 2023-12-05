@@ -210,7 +210,7 @@ Parameter fuzzing examines how the application processes query strings in GET re
 #### GET Parameter fuzzing
 Correct command:
 <div class="code-snippet">
-<pre><code>fffuf -w parameters.txt:FUZZ -u http://localhost/admin/index.php?key=FUZZ</code></pre>
+<pre><code>ffuf -w parameters.txt:FUZZ -u http://localhost/admin/index.php?key=FUZZ</code></pre>
 <button class="copy-button" onclick="copyToClipboard('ffuf -w parameters.txt:FUZZ -u http://localhost/admin/index.php?key=FUZZ')"></button>
 </div>
 
