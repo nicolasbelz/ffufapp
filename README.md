@@ -172,6 +172,12 @@ Correct payload with verbose output:
 <button class="copy-button" onclick="copyToClipboard('ffuf -w list.txt:FUZZ -u http://localhost/FUZZ -e .php -v')"></button>
 </div>
 
+Command to get all pages in the webapp:
+<div class="code-snippet">
+<pre><code>ffuf -w list.txt:FUZZ -u http://localhost/FUZZ -recursion -recursion-depth 2 -e .php,.css -v</code></pre>
+<button class="copy-button" onclick="copyToClipboard('ffuf -w list.txt:FUZZ -u http://localhost/FUZZ -recursion -recursion-depth 2 -e .php,.css -v')"></button>
+</div>
+
 <!-- ffuf -w list.txt:FUZZ -u http://localhost/FUZZ -e .php
 ffuf -w list.txt:FUZZ -u http://localhost/FUZZ -e .php -v -->
 
