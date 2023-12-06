@@ -129,7 +129,7 @@ The penetration testing process with `ffuf` employs a structured methodology, le
 ---
 
 ### Directory Fuzzing
-This technique tests for directory names, seeking to uncover unsecured folders that could contain sensitive information. FUZZ acts as a placeholder for directory names within the URL path, and each entry from list.txt replaces FUZZ to test different directory combinations.
+This technique tests for directory names, seeking to uncover unsecured folders that could contain sensitive information. `FUZZ` acts as a placeholder for directory names within the URL path, and each entry from list.txt replaces `FUZZ` to test different directory combinations.
 
 Correct command:
 <div class="code-snippet">
@@ -137,8 +137,9 @@ Correct command:
 <button class="copy-button" onclick="copyToClipboard('ffuf -w list.txt:FUZZ -u http://localhost/FUZZ')"></button>
 </div>
 
-Focuses on discovering accessible PHP files by iterating through potential file names with the `.php` extension.
+Response code/Status `301`: All listed paths (about, config, admin, api) are redirecting to another location. This might indicate that these directories exist but are set up to redirect users elsewhere
 
+This output is useful for understanding which paths exist on the server and how the server responds to requests to these paths. In penetration testing, this information is critical for mapping the application and identifying potential areas for deeper investigation.
  
 ---
 
@@ -151,15 +152,13 @@ Correct command:
 <button class="copy-button" onclick="copyToClipboard('ffuf -w list.txt:FUZZ -u http://localhost/FUZZ.php')"></button>
 </div>
 
-
-
 Focuses on discovering accessible PHP files by iterating through potential file names with the `.php` extension.
 
 
 ---
 
 ### Directory and Page Fuzzing with Extensions
-Here, the -e flag extends the fuzzing to include file extensions, effectively searching for files of a particular type. The -v flag provides verbose output, offering full URLs and redirection paths, which aids in detailed analysis of the application's response.
+Here, the `-e` flag extends the fuzzing to include file extensions, effectively searching for files of a particular type. The -v flag provides verbose output, offering full URLs and redirection paths, which aids in detailed analysis of the application's response.
 
 Correct command:
 <div class="code-snippet">
@@ -204,7 +203,7 @@ Delves into directories found during initial fuzzing, with `-recursion-depth` co
 ---
 
 ### Parameter Fuzzing for GET and POST Requests
-Parameter fuzzing examines how the application processes query strings in GET requests and data payloads in POST requests. By altering the key parameter, we can identify how the application responds to various inputs. The -mc flag filters out all responses except those with specific status codes, such as 200, indicating a successful hit.
+Parameter fuzzing examines how the application processes query strings in `GET` requests and data payloads in POST requests. By altering the key parameter, we can identify how the application responds to various inputs. The `-mc` flag filters out all responses except those with specific status codes, such as `200`, indicating a successful hit.
 
 
 #### GET Parameter fuzzing
@@ -231,12 +230,12 @@ Correct command:
 </div>
 <!-- ffuf -w parameters.txt:FUZZ -u http://localhost/admin/index.php -X POST -d 'key=FUZZ' -H 'Content-Type: application/x-www-form-urlencoded' -->
 
-Examines the application's processing of query strings in GET requests and data payloads in POST requests. `-mc` flag is used to filter responses by status codes.
+Examines the application's processing of query strings in `GET` requests and data payloads in `POST` requests. `-mc` flag is used to filter responses by status codes.
 
 ---
 
 ### Value Fuzzing
-Value fuzzing tests for valid identifiers or keys. It can reveal the correct handling of expected data and expose how the application responds to valid versus invalid data. The -mc 200 flag is used to filter responses and list only the correct IDs or keys that return a successful HTTP status.
+Value fuzzing tests for valid identifiers or keys. It can reveal the correct handling of expected data and expose how the application responds to valid versus invalid data. The `-mc 200` flag is used to filter responses and list only the correct IDs or keys that return a successful HTTP status.
 
 Correct command to list the specific ID:
 <div class="code-snippet">
@@ -258,7 +257,7 @@ Tests for valid identifiers or keys to reveal correct data handling and the appl
 
 
 ### Cookie Fuzzing
-Cookie Injection Vulnerability Testing explores an application's response to manipulated cookie values. This method uncovers how the application behaves when presented with both legitimate and illegitimate cookie data. Using FFUF, we systematically can test various cookie values, focusing on the access_token cookie to access a restricted page in our case study thr user_session.php
+Cookie Injection Vulnerability Testing explores an application's response to manipulated cookie values. This method uncovers how the application behaves when presented with both legitimate and illegitimate cookie data. Using FFUF, we systematically can test various cookie values, focusing on the `access_token` cookie to access a restricted page in our case study the `user_session.php`
 
 Correct command:
 <div class="code-snippet">
@@ -267,14 +266,14 @@ Correct command:
 </div>
 
 
-Check the response header with this curl command:
+Check the response header with this `curl` command:
 <div class="code-snippet">
 <pre><code>curl -b "access_token=XJ92n%23k%403ZQ%218hT6v" http://localhost/user_session.php -v</code></pre>
 <button class="copy-button" onclick="copyToClipboard('curl -b "access_token=XJ92n%23k%403ZQ%218hT6v" http://localhost/user_session.php -v')"></button>
 </div>
 
 ### Token Fuzzing
-Tests the security of custom HTTP header-based authentication mechanisms. By manipulating the header values using the option -H "X-Custom-Auth: FUZZ" we can inject different values from the wordlist into the X-Custom-Auth header. The FUZZ keyword is a placeholder that ffuf replaces with each line from tokens.txt., it assesses the application's response to both legitimate and illegitimate authentication attempts. Utilizing ffuf with the -H flag, various potential authentication tokens are tested. This methodology is effective in pinpointing weaknesses in the implementation of header-based authentication in web applications.
+Tests the security of custom HTTP header-based authentication mechanisms. By manipulating the header values using the option `-H "X-Custom-Auth: FUZZ"` we can inject different values from the wordlist into the `X-Custom-Auth` header. The `FUZZ` keyword is a placeholder that ffuf replaces with each line from tokens.txt., it assesses the application's response to both legitimate and illegitimate authentication attempts. Utilizing ffuf with the `-H` flag, various potential authentication tokens are tested. This methodology is effective in pinpointing weaknesses in the implementation of header-based authentication in web applications.
 
 Correct command:
 <div class="code-snippet">
@@ -283,10 +282,10 @@ Correct command:
 </div>
 
 ### Custom Header Fuzzing
-In the attack, we are testing the web application's response to different custom headers. The custom header is specified in the request, and FFuF replaces the "FUZZ" placeholder in the header with values from the wordlist. We defined different payloads in the request.txt file. Each payload represents a different scenario or input to test the application's response. For example, you are testing with different custom headers and POST data values. The request.txt file contains the HTTP requests to be sent. Each request block in the file represents a different test case, including the custom header and payload. The custom_header.txt file contains a list of potential values that FFuF will substitute for the "FUZZ" placeholder in the custom header. FFuF will test each value from the wordlist against the custom header.
+In the attack, we are testing the web application's response to different custom headers. The custom header is specified in the request, and FFuF replaces the `FUZZ` placeholder in the header with values from the wordlist. We defined different payloads in the `request.txt` file. Each payload represents a different scenario or input to test the application's response. For example, you are testing with different custom headers and `POST` data values. The `request.txt` file contains the HTTP requests to be sent. Each request block in the file represents a different test case, including the custom header and payload. The `custom_header.txt` file contains a list of potential values that FFuF will substitute for the `FUZZ` placeholder in the custom header. FFuF will test each value from the wordlist against the custom header.
 
--request request.txt: Specifies the request file that contains the HTTP requests to be sent. Each request block in this file represents a different test case with various payloads.
--u http://localhost/custom_header.php: Specifies the base URL of the target web application. In your case, it's a local server running on http://localhost
+`-request request.txt`: Specifies the request file that contains the HTTP requests to be sent. Each request block in this file represents a different test case with various payloads.
+`-u http://localhost/custom_header.php`: Specifies the base URL of the target web application. In your case, it's a local server running on `http://localhost`
 
 Correct command:
 <div class="code-snippet">
@@ -311,9 +310,11 @@ Wrong command to test different output:
 Each method is crafted to test for different vulnerabilities, with the placement of `FUZZ` designed to mimic attacker actions and ensure comprehensive coverage of common attack vectors.
 
 
-This README provides a clear guide to using ffuf for penetration testing, including detailed code snippets for each type of fuzzing technique
+This README provides a clear guide to using ffuf for penetration testing, including detailed code snippets for each type of fuzzing technique.
 
 ---
 
 ## License
 License information for the project.
+
+
