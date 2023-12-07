@@ -6,6 +6,7 @@
    - [Install docker-compose](#install-docker-compose)
 3. [Installation](#installation)
    - [Clone git repository](#clone-git-repository)
+   - [Clone SecLists git repository](#clone-seclists-git-repository)
    - [Start lab environment](#start-lab-environment)
 4. [Usage](#usage)
    - [Directory Fuzzing](#directory-fuzzing)
@@ -94,6 +95,15 @@ Clone the project from the github repository to your direcotry on your linux mac
 <button class="copy-button" onclick="copyToClipboard('sudo git clone https://github.com/nicolasbelz/webapp.git')"></button>
 </div>
 
+### Clone SecLists git repository
+Clone the SecLists github repository to `/opt` on your linux machine using this command:
+<div class="code-snippet">
+<pre><code>cd opt
+sudo git clone https://github.com/danielmiessler/SecLists.git</code></pre>
+<button class="copy-button" onclick="copyToClipboard('cd opt
+sudo git clone https://github.com/danielmiessler/SecLists.git')"></button>
+</div>
+
 ### Start lab environment
 Open the terminal in the cloned project directory and start the web application using this command:
 <div class="code-snippet">
@@ -124,7 +134,14 @@ Restart docker if needed by running this command:
 ## Usage
 Guidelines and description of the testing techniques used in this project.
 
-The penetration testing process with `ffuf` employs a structured methodology, leveraging the `FUZZ` keyword to probe different aspects of a web application. Below is an in-depth analysis of each technique used:
+The penetration testing process with `ffuf` employs a structured methodology, leveraging the `FUZZ` keyword to probe different aspects of a web application. Below is an in-depth analysis of each technique used.
+
+Command template:
+<div class="code-snippet">
+<pre><code>ffuf -w [WORDLIST] -u http://SERVER_IP:PORT/FUZZ</code></pre>
+<button class="copy-button" onclick="copyToClipboard('ffuf -w [WORDLIST] -u http://SERVER_IP:PORT/FUZZ')"></button>
+</div>
+
 
 ---
 
