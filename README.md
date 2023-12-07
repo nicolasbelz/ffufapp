@@ -44,21 +44,21 @@ If needed upgrade your linux machine with this command:
 </div>
 
 ### Install docker
-Install docker with this command
+Install `docker` with this command:
 <div class="code-snippet">
 <pre><code>sudo apt install -y docker.io</code></pre>
 <button class="copy-button" onclick="copyToClipboard('sudo apt install -y docker.io')"></button>
 </div>
 
 You can skip this step if you have the requirement already instaled.
-Check the docker version with this command:
+Check the `docker` version with this command:
 <div class="code-snippet">
 <pre><code>docker-compose --version</code></pre>
 <button class="copy-button" onclick="copyToClipboard('docker-compose --version')"></button>
 </div>
 
 ### Install docker-compose
-Install docker-compose on your machine with this command:
+Install `docker-compose` on your machine with this command:
 <div class="code-snippet">
 <pre><code>sudo wget "https://github.com/docker/compose/releases/download/v2.23.1/docker-compose-$(uname -s)-$(uname -m)" -O /usr/local/bin/docker-compose</code></pre>
 <button class="copy-button" onclick="copyToClipboard('sudo wget "https://github.com/docker/compose/releases/download/v2.23.1/docker-compose-$(uname -s)-$(uname -m)" -O /usr/local/bin/docker-compose')"></button>
@@ -71,7 +71,7 @@ Test docker installation by running this command:
 </div>
 
 You can skip this step if you have the requirement already instaled.
-Check the docker version with this command:
+Check the `docker` version with this command:
 <div class="code-snippet">
 <pre><code>docker-compose --version</code></pre>
 <button class="copy-button" onclick="copyToClipboard('docker-compose --version')"></button>
@@ -96,7 +96,7 @@ Clone the project from the github repository to your direcotry on your linux mac
 </div>
 
 ### Clone SecLists git repository
-Clone the SecLists github repository to `/opt` on your linux machine using this command:
+Clone the `SecLists` github repository to `/opt` on your linux machine using this command:
 <div class="code-snippet">
 <pre><code>cd opt
 sudo git clone https://github.com/danielmiessler/SecLists.git</code></pre>
@@ -111,19 +111,19 @@ Open the terminal in the cloned project directory and start the web application 
 <button class="copy-button" onclick="copyToClipboard('sudo docker-compose up -d')"></button>
 </div>
 
-Access the web application on your browser via 'localhost':
+Access the web application on your browser via `localhost`:
 <div class="code-snippet">
 <pre><code>http://localhost</code></pre>
 <button class="copy-button" onclick="copyToClipboard('http://localhost')"></button>
 </div>
 
-If the web application is not accessible check if docker is enabled by running this command:
+If the web application is not accessible check if `docker` is enabled by running this command:
 <div class="code-snippet">
 <pre><code>sudo systemctl status docker</code></pre>
 <button class="copy-button" onclick="copyToClipboard('sudo systemctl status docker')"></button>
 </div>
 
-Restart docker if needed by running this command:
+Restart `docker` if needed by running this command:
 <div class="code-snippet">
 <pre><code>sudo systemctl restart docker</code></pre>
 <button class="copy-button" onclick="copyToClipboard('sudo systemctl restart docker')"></button>
@@ -143,8 +143,10 @@ Command template:
 </div>
 
 Note:
-More advanced students can use the SecLists to work on more complicated vulnerabilites and learn about different types of lists used during security assessments. List types include usernames, passwords, URLs, sensitive data patterns, fuzzing payloads, web shells, etc. 
+More advanced students can use the `SecLists` to work on more complicated vulnerabilites and learn about different types of lists used during security assessments. List types include usernames, passwords, URLs, sensitive data patterns, fuzzing payloads, web shells, etc. 
 Each of testing techinque mentioned in this lab has a correct working command. To analyse larger outputs you can use the `wordlist.txt` list that contains much more data but it will also extend the testing process time.
+
+---
 
 ### Directory Fuzzing
 This technique tests for directory names, seeking to uncover unsecured folders that could contain sensitive information. `FUZZ` acts as a placeholder for directory names within the URL path, and each entry from list.txt replaces `FUZZ` to test different directory combinations.
