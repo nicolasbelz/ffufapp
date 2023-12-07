@@ -23,7 +23,7 @@
 5. [License](#license)
 
 ## Introduction
-This repository is a a comprehensive resource for learning penetration testing techniques using `ffuf`. It offers structured guidelines and an in-depth analysis of various testing methods, including directory fuzzing, page fuzzing, and more advanced techniques like recursive fuzzing and custom header fuzzing. Each technique is detailed with correct commands and practical scenarios, aiding learners in understanding the nuances of web application vulnerabilities. This repository serves as an ideal starting point for individuals or students keen on mastering web security assessment skills using `ffuf`.
+This repository is a a comprehensive resource for learning penetration testing techniques using `ffuf`. This repository serves as an ideal starting point for individuals or students keen on mastering web security assessment skills using `ffuf`.
 ---
 
 ## Requirements
