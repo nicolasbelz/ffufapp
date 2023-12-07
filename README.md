@@ -18,7 +18,7 @@
      * [POST Parameter fuzzing](#get-parameter-fuzzing)
    - [Value Fuzzing](#value-fuzzing)
    - [Cookie Fuzzing](#cookie-fuzzing)
-   - [Token FUzzing](#token-fuzzing)
+   - [Token Fuzzing](#token-fuzzing)
    - [Custom Header Fuzzing](#custom-header-fuzzing)
 5. [License](#license)
 
