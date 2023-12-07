@@ -146,7 +146,7 @@ Note:
 More advanced students can use the `SecLists` to work on more complicated vulnerabilites and learn about different types of lists used during security assessments. List types include usernames, passwords, URLs, sensitive data patterns, fuzzing payloads, web shells, etc. 
 Each of testing techinque mentioned in this lab has a correct working command. To analyse larger outputs you can use the `wordlist.txt` list that contains much more data but it will also extend the testing process time.
 
-----
+---
 
 ### Directory Fuzzing
 This technique tests for directory names, seeking to uncover unsecured folders that could contain sensitive information. `FUZZ` acts as a placeholder for directory names within the URL path, and each entry from list.txt replaces `FUZZ` to test different directory combinations.
