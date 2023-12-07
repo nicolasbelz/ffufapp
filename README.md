@@ -23,7 +23,9 @@
 5. [License](#license)
 
 ## Introduction
-This repository is a a comprehensive resource for learning penetration testing techniques using `ffuf`. This repository serves as an ideal starting point for individuals or students keen on mastering web security assessment skills using `ffuf`.
+This repository is a a comprehensive resource for learning penetration testing techniques using `ffuf`. 
+
+This repository serves as an ideal starting point for individuals or students keen on mastering web security assessment skills using `ffuf`.
 
 ---
 
