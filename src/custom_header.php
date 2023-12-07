@@ -20,4 +20,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     http_response_code(405); // Method Not Allowed
     echo "Invalid request method. This page expects a POST request.";
 }
+
+echo "Try Custom Header Fuzzing to exploit the vulnerability"
 ?>

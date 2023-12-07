@@ -6,4 +6,4 @@ if (!isset($_COOKIE['access_token']) || $_COOKIE['access_token'] !== 'XJ92n#k@3Z
 }
 
 // Vulnerable code here (e.g., SQL injection, XSS)
-echo "Welcome to the hidden vulnerable page.";
+echo "Welcome to the hidden vulnerable page. Check if you can inject a cookie here";

@@ -20,4 +20,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     echo "<p>Invalid request method.</p>";
 }
 
+echo "Welcome to the hidden vulnerable page. Check if you can fuzz values here to exploit the vulnerability";
+
 ?>
+
+

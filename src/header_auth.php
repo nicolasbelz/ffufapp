@@ -9,3 +9,4 @@ if (isset($_SERVER['HTTP_X_CUSTOM_AUTH']) && $_SERVER['HTTP_X_CUSTOM_AUTH'] === 
     http_response_code(401); // Unauthorized
     echo "Authentication failed.";
 }
+echo "Try Custom Header Fuzzing to exploit the vulnerability";

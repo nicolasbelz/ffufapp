@@ -153,12 +153,16 @@ Correct command:
 </div>
 
 Focuses on discovering accessible PHP files by iterating through potential file names with the `.php` extension.
+index [Status: 200, ...]:  file `index.php` exists and is accessible, size, word count, and line count give an idea of the content’s complexity.
 
+header_auth [Status: 401, ...]: Access to `header_auth.php` is unauthorized, suggesting it requires authentication, which can be a point of interest for testing authentication mechanisms.
+
+user session.php [Status: 302, ...]: A temporary redirect response from `user_session.php`. This could indicate a redirection to a login page or another part of the application.
 
 ---
 
 ### Directory and Page Fuzzing with Extensions
-Here, the `-e` flag extends the fuzzing to include file extensions, effectively searching for files of a particular type. The -v flag provides verbose output, offering full URLs and redirection paths, which aids in detailed analysis of the application's response.
+Here, the `-e` flag extends the fuzzing to include file extensions, effectively searching for files of a particular type. The `-v `flag provides verbose output, offering full URLs and redirection paths, which aids in detailed analysis of the application's response.
 
 Correct command:
 <div class="code-snippet">
@@ -232,6 +236,12 @@ Correct command:
 
 Examines the application's processing of query strings in `GET` requests and data payloads in `POST` requests. `-mc` flag is used to filter responses by status codes.
 
+Access the `http://localhost/admin/index.php` with the proper parameter with this command:
+<div class="code-snippet">
+<pre><code>http://localhost/admin/index.php?key=3x@mpl3_K3yP@r@m3t3r_2O23</code></pre>
+<button class="copy-button" onclick="copyToClipboard('http://localhost/admin/index.php?key=3x@mpl3_K3yP@r@m3t3r_2O23')"></button>
+</div>
+
 ---
 
 ### Value Fuzzing
@@ -252,12 +262,16 @@ Command to list all IDs:
 </div>
 <!-- ffuf -w ids.txt:FUZZ -u http://localhost/admin/flagvalue.php -X POST -d 'id=FUZZ' -H 'Content-Type: application/x-www-form-urlencoded' -->
 
+Check the hidden data using this `curl` command:
+<div class="code-snippet">
+<pre><code>curl -X POST http://localhost/admin/flagvalue.php -H 'Content-Type: application/x-www-form-urlencoded' -d 'id=42'</code></pre>
+<button class="copy-button" onclick="copyToClipboard('curl -X POST http://localhost/admin/flagvalue.php -H 'Content-Type: application/x-www-form-urlencoded' -d 'id=42'')"></button>
+</div>
 
-Tests for valid identifiers or keys to reveal correct data handling and the application's response to valid versus invalid data.
-
+---
 
 ### Cookie Fuzzing
-Cookie Injection Vulnerability Testing explores an application's response to manipulated cookie values. This method uncovers how the application behaves when presented with both legitimate and illegitimate cookie data. Using FFUF, we systematically can test various cookie values, focusing on the `access_token` cookie to access a restricted page in our case study the `user_session.php`
+Cookie Injection Vulnerability Testing explores an application's response to manipulated cookie values. This method uncovers how the application behaves when presented with both legitimate and illegitimate cookie data. Using FFUF, we systematically can test various cookie values, focusing on the `access_token` cookie to access a restricted page in our case study the `user_session.php`.
 
 Correct command:
 <div class="code-snippet">
@@ -272,14 +286,26 @@ Check the response header with this `curl` command:
 <button class="copy-button" onclick="copyToClipboard('curl -b "access_token=XJ92n%23k%403ZQ%218hT6v" http://localhost/user_session.php -v')"></button>
 </div>
 
+---
+
 ### Token Fuzzing
-Tests the security of custom HTTP header-based authentication mechanisms. By manipulating the header values using the option `-H "X-Custom-Auth: FUZZ"` we can inject different values from the wordlist into the `X-Custom-Auth` header. The `FUZZ` keyword is a placeholder that ffuf replaces with each line from tokens.txt., it assesses the application's response to both legitimate and illegitimate authentication attempts. Utilizing ffuf with the `-H` flag, various potential authentication tokens are tested. This methodology is effective in pinpointing weaknesses in the implementation of header-based authentication in web applications.
+Tests the security of custom HTTP header-based authentication mechanisms. By manipulating the header values using the option `-H "X-Custom-Auth: FUZZ"` we can inject different values from the wordlist into the `X-Custom-Auth` header. The `FUZZ` keyword is a placeholder that ffuf replaces with each line from `tokens.txt`, it assesses the application's response to both legitimate and illegitimate authentication attempts. Utilizing ffuf with the `-H` flag, various potential authentication tokens are tested. This methodology is effective in pinpointing weaknesses in the implementation of header-based authentication in web applications.
 
 Correct command:
 <div class="code-snippet">
 <pre><code>ffuf -w tokens.txt -u http://localhost/header_auth.php -H "X-Custom-Auth: FUZZ"</code></pre>
 <button class="copy-button" onclick="copyToClipboard('ffuf -w tokens.txt -u http://localhost/header_auth.php -H "X-Custom-Auth: FUZZ"')"></button>
 </div>
+
+Check the hidden data using this `curl` command:
+<div class="code-snippet">
+<pre><code>curl -H "X-Custom-Auth: 4b82Km29Fv6zQ3xT8pW5Jr7Hn" http://localhost/header_auth.php</code></pre>
+<button class="copy-button" onclick="copyToClipboard('curl -H "X-Custom-Auth: 4b82Km29Fv6zQ3xT8pW5Jr7Hn" http://localhost/header_auth.php')"></button>
+</div>
+
+Note: Header-based authentication using tokens is a secure and efficient method for managing user authentication in web services, particularly in RESTful APIs. This method leverages HTTP headers to transmit authentication tokens, which validate user sessions.
+
+---
 
 ### Custom Header Fuzzing
 In the attack, we are testing the web application's response to different custom headers. The custom header is specified in the request, and FFuF replaces the `FUZZ` placeholder in the header with values from the wordlist. We defined different payloads in the `request.txt` file. Each payload represents a different scenario or input to test the application's response. For example, you are testing with different custom headers and `POST` data values. The `request.txt` file contains the HTTP requests to be sent. Each request block in the file represents a different test case, including the custom header and payload. The `custom_header.txt` file contains a list of potential values that FFuF will substitute for the `FUZZ` placeholder in the custom header. FFuF will test each value from the wordlist against the custom header.
@@ -303,6 +329,13 @@ Wrong command to test different output:
 <div class="code-snippet">
 <pre><code>ffuf -w custom_header.txt -request wrong_requestv2.txt -u http://localhost/custom_header.php</code></pre>
 <button class="copy-button" onclick="copyToClipboard('ffuf -w custom_header.txt -request wrong_requestv2.txt -u http://localhost/custom_header.php')"></button>
+</div>
+
+
+Check the hidden data using this `curl` command:
+<div class="code-snippet">
+<pre><code>curl -X POST http://localhost/custom_header.php -H "X-Custom-Header: testheader" -H "Content-Type: application/x-www-form-urlencoded" -d "key=secretValue"</code></pre>
+<button class="copy-button" onclick="copyToClipboard('curl -X POST http://localhost/custom_header.php -H "X-Custom-Header: testheader" -H "Content-Type: application/x-www-form-urlencoded" -d "key=secretValue"')"></button>
 </div>
 
 ---

@@ -24,7 +24,6 @@
 <div id="sidebar">
     <a href="sql_injection.php">SQL Injection</a>
     <a href="xss_vulnerable.php">XSS Vulnerable</a>
-    <a href="file_inclusion.php">File Inclusion</a>
     <a href="rce/remote_code_execution.php">Remote Code Execution</a>
 </div>
 
