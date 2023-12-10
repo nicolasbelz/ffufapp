@@ -365,14 +365,22 @@ Note: Header-based authentication using tokens is a secure and efficient method 
 ### Custom Header Fuzzing
 In the attack, we are testing the web application's response to different custom headers. The custom header is specified in the request, and FFuF replaces the `FUZZ` placeholder in the header with values from the wordlist. We defined different payloads in the `request.txt` file. Each payload represents a different scenario or input to test the application's response. For example, you are testing with different custom headers and `POST` data values. The `request.txt` file contains the HTTP requests to be sent. Each request block in the file represents a different test case, including the custom header and payload. The `custom_header.txt` file contains a list of potential values that FFuF will substitute for the `FUZZ` placeholder in the custom header. FFuF will test each value from the wordlist against the custom header.
 
-`-request request.txt`: Specifies the request file that contains the HTTP requests to be sent. 
+`-request request.txt` - specifies the request file that contains the HTTP requests to be sent. 
 
-`-u http://localhost/custom_header.php`: Specifies the base URL of the target web application.
+-`request test_request.txt` - specifies different request send that has the FUZZ placeholder in the key value
+
+`-u http://localhost/custom_header.php` - specifies the base URL of the target web application.
 
 Correct command:
 <div class="code-snippet">
 <pre><code>ffuf -w custom_header.txt -request request.txt -u http://localhost/custom_header.php</code></pre>
 <button class="copy-button" onclick="copyToClipboard('ffuf -w custom_header.txt -request request.txt -u http://localhost/custom_header.php')"></button>
+</div>
+
+Correct command different request:
+<div class="code-snippet">
+<pre><code>ffuf -w test_values.txt -request test_request.txt -u http://localhost/custom_header.php</code></pre>
+<button class="copy-button" onclick="copyToClipboard('ffuf -w test_values.txt -request test_request.txt -u http://localhost/custom_header.php')"></button>
 </div>
 
 Wrong command to test different output:
