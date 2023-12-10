@@ -367,7 +367,7 @@ In the attack, we are testing the web application's response to different custom
 
 `-request request.txt` - specifies the request file that contains the HTTP requests to be sent. 
 
--`request test_request.txt` - specifies different request send that has the FUZZ placeholder in the key value
+`-request test_request.txt` - specifies different request send that has the FUZZ placeholder in the key value
 
 `-u http://localhost/custom_header.php` - specifies the base URL of the target web application.
 
