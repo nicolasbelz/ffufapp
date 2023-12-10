@@ -45,6 +45,12 @@ If needed upgrade your linux machine with this command:
 <button class="copy-button" onclick="copyToClipboard('sudo apt upgrade')"></button>
 </div>
 
+Update `docker` configuration files with this command:
+<div class="code-snippet">
+<pre><code>sudo dpkg --configure -a</code></pre>
+<button class="copy-button" onclick="copyToClipboard('sudo dpkg --configure -a')"></button>
+</div>
+
 ### Install docker
 Install `docker` with this command:
 <div class="code-snippet">
@@ -52,7 +58,7 @@ Install `docker` with this command:
 <button class="copy-button" onclick="copyToClipboard('sudo apt install -y docker.io')"></button>
 </div>
 
-You can skip this step if you have the requirement already instaled.
+You can skip this step if you have the requirement already installed.
 Check the `docker` version with this command:
 <div class="code-snippet">
 <pre><code>docker-compose --version</code></pre>
@@ -147,6 +153,33 @@ Command template:
 Note:
 More advanced students can use the `SecLists` to work on more complicated vulnerabilites and learn about different types of lists used during security assessments. List types include usernames, passwords, URLs, sensitive data patterns, fuzzing payloads, web shells, etc. 
 Each of testing techinque mentioned in this lab has a correct working command. To analyse larger outputs you can use the `wordlist.txt` list that contains much more data but it will also extend the testing process time.
+
+In this lab we have fully working wordlists to run ffuf attacks. for each testing technique we have different wordlists:
+
+list.txt - wordlist containing all endpoints of the vulnerable webapp (directories, subdirectories, pages)
+
+parameters.txt - wordlist containing potential parameters 
+
+ids.txt - wordlist containing numbers from 1 to 1000, that could be used as ID values
+
+cookie_values.txt - wordlist containing diffferent cookie values
+
+tokens.txt - wordlist containing token values for custom HTTP header-based authentication mechanisms
+
+custom_header.txt - wordlist containing values for a custom header
+
+request.txt - file containing a HTTP request
+
+wrong_request.txt - file containing a HTTP requests with a wrong key value to test
+
+wrong_requestv2.txt - file containing a HTTP requests with a wrong custom header
+
+wordlist.txt - wordlist containing a lot of different data for more advanced testing
+
+It's not recommended to modify the wordlists. They are created specifically to test this Vulnerable Web App.
+
+TODO TODO
+You can modify the `wordlist.txt` for a more indyvidualised testing purposes.
 
 ---
 
@@ -332,8 +365,9 @@ Note: Header-based authentication using tokens is a secure and efficient method 
 ### Custom Header Fuzzing
 In the attack, we are testing the web application's response to different custom headers. The custom header is specified in the request, and FFuF replaces the `FUZZ` placeholder in the header with values from the wordlist. We defined different payloads in the `request.txt` file. Each payload represents a different scenario or input to test the application's response. For example, you are testing with different custom headers and `POST` data values. The `request.txt` file contains the HTTP requests to be sent. Each request block in the file represents a different test case, including the custom header and payload. The `custom_header.txt` file contains a list of potential values that FFuF will substitute for the `FUZZ` placeholder in the custom header. FFuF will test each value from the wordlist against the custom header.
 
-`-request request.txt`: Specifies the request file that contains the HTTP requests to be sent. Each request block in this file represents a different test case with various payloads.
-`-u http://localhost/custom_header.php`: Specifies the base URL of the target web application. In your case, it's a local server running on `http://localhost`
+`-request request.txt`: Specifies the request file that contains the HTTP requests to be sent. 
+
+`-u http://localhost/custom_header.php`: Specifies the base URL of the target web application.
 
 Correct command:
 <div class="code-snippet">
