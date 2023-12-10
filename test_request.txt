@@ -1,0 +1,7 @@
+POST /custom_header.php HTTP/1.1
+Host: localhost
+X-Custom-Header: custom_header_value
+Content-Type: application/x-www-form-urlencoded
+Content-Length: 13
+
+key= FUZZ

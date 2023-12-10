@@ -154,7 +154,7 @@ Note:
 More advanced students can use the `SecLists` to work on more complicated vulnerabilites and learn about different types of lists used during security assessments. List types include usernames, passwords, URLs, sensitive data patterns, fuzzing payloads, web shells, etc. 
 Each of testing techinque mentioned in this lab has a correct working command. To analyse larger outputs you can use the `wordlist.txt` list that contains much more data but it will also extend the testing process time.
 
-In this lab we have fully working wordlists to run ffuf attacks. for each testing technique we have different wordlists:
+In this lab we have fully working wordlists to run ffuf attacks. For each testing technique we have different wordlists:
 
 list.txt - wordlist containing all endpoints of the vulnerable webapp (directories, subdirectories, pages)
 
