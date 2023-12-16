@@ -410,6 +410,30 @@ Each method is crafted to test for different vulnerabilities, with the placement
 This README provides a clear guide to using ffuf for penetration testing, including detailed code snippets for each type of fuzzing technique.
 
 ---
+## Learning Scenario
+To fuzz succesfully a web application we should start with Directory Fuzzing.
+Run this command to discover the directories in the web app:
+<div class="code-snippet">
+<pre><code>ffuf -w list.txt:FUZZ -u http://localhost/FUZZ</code></pre>
+<button class="copy-button" onclick="copyToClipboard('ffuf -w list.txt:FUZZ -u http://localhost/FUZZ')"></button>
+</div>
+
+You can see that there are a few directories worth testing: which is the `config`, `rce`, `api` and especially the `admin`.
+
+Try to start fuzzing for pages in this level of direcories to see what you can find with this command:
+<div class="code-snippet">
+<pre><code>ffuf -w list.txt:FUZZ -u http://localhost/FUZZ.php</code></pre>
+<button class="copy-button" onclick="copyToClipboard('ffuf -w list.txt:FUZZ -u http://localhost/FUZZ.php')"></button>
+</div>
+
+You can sse that we have a few pages worth checking. The accessible ones like xss_vulnerable and unaccessible like user_sessions, custom_header, header_auth. Try to access them one by one via the URL to see what output you will get. For example try to input this URL: `http://localhost/user_session.php`. You can see that you will be redirected but let's try to test it using this curl command:
+<div class="code-snippet">
+<pre><code>curl http://localhost/user_session.php</code></pre>
+<button class="copy-button" onclick="copyToClipboard('url http://localhost/user_session.php')"></button>
+</div>
+
+You can see that there is a hint which ffuf testing technique to use, in this case the [Cookie Fuzzing](#cookie-fuzzing)
+
 
 ## License
 License information for the project.
