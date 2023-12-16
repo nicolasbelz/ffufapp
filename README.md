@@ -412,7 +412,8 @@ This README provides a clear guide to using ffuf for penetration testing, includ
 
 ---
 ## Learning Scenario
-**Step 1**To fuzz succesfully a web application we should start with [Directory Fuzzing](#directory-fuzzing).
+**Step 1** To fuzz succesfully a web application we should start with [Directory Fuzzing](#directory-fuzzing).
+
 Run this command to discover the directories in the web app:
 <div class="code-snippet">
 <pre><code>ffuf -w list.txt:FUZZ -u http://localhost/FUZZ</code></pre>
@@ -421,29 +422,38 @@ Run this command to discover the directories in the web app:
 
 You can see that there are a few directories worth testing: `config`, `rce`, `api` and especially the `admin` directory.
 
-**Step 2**Start fuzzing for pages in this level of direcories to see what you can find with this command [Page Fuzzing](#page_fuzzing):
-<div class="code-snippet">page_fuzzing
-<pre><code>ffuf -w list.txt:FUZZ -u http://localhost/FUZZ.php</code></pre>
-<button class="copy-button" onclick="copyToClipboard('ffuf -w list.txt:FUZZ -u http://localhost/FUZZ.php')"></button>
-</div>
+**Step 2** Start fuzzing for pages in this level of direcories to see what you can find with [Page Fuzzing](#page_fuzzing).
 
-Try this command to see the directories and pages with a verbose output:
+Use this command:
+<div class="code-snippet">page_fuzzingrecursive fuzzing and pages with a verbose output:
 <div class="code-snippet">
 <pre><code>ffuf -w list.txt:FUZZ -u http://localhost/FUZZ -e .php -v</code></pre>
 <button class="copy-button" onclick="copyToClipboard('ffuf -w list.txt:FUZZ -u http://localhost/FUZZ -e .php -v')"></button>
 </div>
 If you want to learn more about this technique click here: [Directory and Page Fuzzing with Extensions](#directory-and-page-fuzzing-with-extensions)
 
-After gathering information about the directories and pages let's focus on the admin panel. You can use this curl command to get a hint about which testing technique use:
+**Step 3** Try to do some [Recursive Fuzzing](#recursive-fuzzing) and focus on potential vectors of attack on vulnerable parts of the webapp.
+
+
+You can see that after fuzzing the `admin` directory you get `index.php` and `flagvalue.php` which you cannot access and `settings.php`, `/users/index.php`, `/users/profile.php` which you can access. It shows that the webapp is not secure in those parts.
+
+You can use this curl command to get a hint about which testing technique use for the `/admin/index.php`:
 <div class="code-snippet">
 <pre><code>curl http://localhost/admin/index.php</code></pre>
 <button class="copy-button" onclick="copyToClipboard('url http://localhost/admin/index.php')"></button>
 </div>
 
-Now you can see that we should use the [Parameter Fuzzing for GET and POST Requests](#parameter-fuzzing-for-get-and-post-requests). Use those methods to gain access to the amdin panel.
+Now you can see that we should use the [Parameter Fuzzing for GET and POST Requests](#parameter-fuzzing-for-get-and-post-requests). Use those methods to gain access to the `admin` panel.
 
-
-
+Correct commands:
+<div class="code-snippet">
+<pre><code>ffuf -w parameters.txt:FUZZ -u http://localhost/admin/index.php?key=FUZZ</code></pre>
+<button class="copy-button" onclick="copyToClipboard('ffuf -w parameters.txt:FUZZ -u http://localhost/admin/index.php?key=FUZZ')"></button>
+</div>
+<div class="code-snippet">
+<pre><code>ffuf -w parameters.txt:FUZZ -u http://localhost/admin/index.php -X POST -d 'key=FUZZ' -H 'Content-Type: application/x-www-form-urlencoded'</code></pre>
+<button class="copy-button" onclick="copyToClipboard('ffuf -w parameters.txt:FUZZ -u http://localhost/admin/index.php -X POST -d 'key=FUZZ' -H 'Content-Type: application/x-www-form-urlencoded')"></button>
+</div>
 
 
 
