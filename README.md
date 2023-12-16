@@ -20,7 +20,8 @@
    - [Cookie Fuzzing](#cookie-fuzzing)
    - [Token Fuzzing](#token-fuzzing)
    - [Custom Header Fuzzing](#custom-header-fuzzing)
-5. [License](#license)
+5. [Learning Scenario](#learning-scenario)
+6. [License](#license)
 
 ## Introduction
 This repository is a a comprehensive resource for learning penetration testing techniques using `ffuf`. 
