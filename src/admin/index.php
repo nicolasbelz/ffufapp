@@ -33,7 +33,7 @@ if (!$is_authorized) {
     <h1>Admin Dashboard</h1>
     <?php if ($is_authorized): ?>
         <!-- The sensitive information is shown only when the correct key is provided -->
-        <p>Flag: {your_flag_here}</p> <!-- Replace with your actual flag -->
+        <p>Flag: {admin_panel_flag}</p>
     <?php endif; ?>
     <a href="settings.php">Settings</a> | <a href="users/">Manage Users</a>
 </body>
