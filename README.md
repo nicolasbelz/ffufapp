@@ -412,7 +412,7 @@ This README provides a clear guide to using ffuf for penetration testing, includ
 
 ---
 ## Learning Scenario
-To fuzz succesfully a web application we should start with [Directory Fuzzing](#directory-fuzzing).
+**Step 1**To fuzz succesfully a web application we should start with [Directory Fuzzing](#directory-fuzzing).
 Run this command to discover the directories in the web app:
 <div class="code-snippet">
 <pre><code>ffuf -w list.txt:FUZZ -u http://localhost/FUZZ</code></pre>
@@ -421,8 +421,8 @@ Run this command to discover the directories in the web app:
 
 You can see that there are a few directories worth testing: `config`, `rce`, `api` and especially the `admin` directory.
 
-Start fuzzing for pages in this level of direcories to see what you can find with this command [Page Fuzzing](#page_fuzzing):
-<div class="code-snippet">
+**Step 2**Start fuzzing for pages in this level of direcories to see what you can find with this command [Page Fuzzing](#page_fuzzing):
+<div class="code-snippet">page_fuzzing
 <pre><code>ffuf -w list.txt:FUZZ -u http://localhost/FUZZ.php</code></pre>
 <button class="copy-button" onclick="copyToClipboard('ffuf -w list.txt:FUZZ -u http://localhost/FUZZ.php')"></button>
 </div>
@@ -440,7 +440,7 @@ After gathering information about the directories and pages let's focus on the a
 <button class="copy-button" onclick="copyToClipboard('url http://localhost/admin/index.php')"></button>
 </div>
 
-Now you can see that we should use the 
+Now you can see that we should use the [Parameter Fuzzing for GET and POST Requests](#parameter-fuzzing-for-get-and-post-requests). Use those methods to gain access to the amdin panel.
 
 
 
@@ -466,37 +466,14 @@ Check the response header with this `curl` command:
 
 You can see that there is a hint which ffuf testing technique use, in this case the [Cookie Fuzzing](#cookie-fuzzing)
 
+More advanced analyse
 
-
-
-
-
-
-
-
-Let's focus on the more advanced techniques 
-
+Cookie FUzzing
 
 Token fuzzing
-Correct command:
-<div class="code-snippet">
-<pre><code>ffuf -w tokens.txt -u http://localhost/header_auth.php -H "X-Custom-Auth: FUZZ"</code></pre>
-<button class="copy-button" onclick="copyToClipboard('ffuf -w tokens.txt -u http://localhost/header_auth.php -H "X-Custom-Auth: FUZZ"')"></button>
-</div>
-
 
 Custom header
-Correct command:
-<div class="code-snippet">
-<pre><code>ffuf -w custom_header.txt -request request.txt -u http://localhost/custom_header.php</code></pre>
-<button class="copy-button" onclick="copyToClipboard('ffuf -w custom_header.txt -request request.txt -u http://localhost/custom_header.php')"></button>
-</div>
 
-Correct command different request:
-<div class="code-snippet">
-<pre><code>ffuf -w test_values.txt -request test_request.txt -u http://localhost/custom_header.php</code></pre>
-<button class="copy-button" onclick="copyToClipboard('ffuf -w test_values.txt -request test_request.txt -u http://localhost/custom_header.php')"></button>
-</div>
 
 ## License
 License information for the project.
