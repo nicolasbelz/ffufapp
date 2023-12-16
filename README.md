@@ -432,8 +432,19 @@ Use this command:
 </div>
 If you want to learn more about this technique click here: [Directory and Page Fuzzing with Extensions](#directory-and-page-fuzzing-with-extensions)
 
-**Step 3** Try to do some [Recursive Fuzzing](#recursive-fuzzing) and focus on potential vectors of attack on vulnerable parts of the webapp.
 
+**Step 3** Try to do some [Recursive Fuzzing](#recursive-fuzzing) and explore all possible parts of the web application. 
+Correect commands:
+<div class="code-snippet">
+<pre><code>ffuf -w list.txt:FUZZ -u http://localhost/FUZZ -recursion -recursion-depth 2</code></pre>
+<button class="copy-button" onclick="copyToClipboard('ffuf -w list.txt:FUZZ -u http://localhost/FUZZ -recursion -recursion-depth 2')"></button>
+</div>
+<div class="code-snippet">
+<pre><code>ffuf -w list.txt:FUZZ -u http://localhost/FUZZ -recursion -recursion-depth 2 -e .php</code></pre>
+<button class="copy-button" onclick="copyToClipboard('ffuf -w list.txt:FUZZ -u http://localhost/FUZZ -recursion -recursion-depth 2 -e .php')"></button>
+</div>
+
+**Step 4** Focus on potential vectors of attack on vulnerable parts of the webapp.
 
 You can see that after fuzzing the `admin` directory you get `index.php` and `flagvalue.php` which you cannot access and `settings.php`, `/users/index.php`, `/users/profile.php` which you can access. It shows that the webapp is not secure in those parts.
 
@@ -463,10 +474,15 @@ Use this curl command to get a hint about which testing technique use for the `/
 
 Now you can see that we should use the [Value Fuzzing](#value-fuzzing). Use this method to gain access to `/admin/flagvalue.php` file.
 
+Correct command to list all IDs:
+<div class="code-snippet">
+<pre><code>ffuf -w ids.txt:FUZZ -u http://localhost/admin/flagvalue.php -X POST -d 'id=FUZZ' -H 'Content-Type: application/x-www-form-urlencoded'</code></pre>
+<button class="copy-button" onclick="copyToClipboard('ffuf -w ids.txt:FUZZ -u http://localhost/admin/flagvalue.php -X POST -d 'id=FUZZ' -H 'Content-Type: application/x-www-form-urlencoded')"></button>
+</div>
 
-
+**Step 5** Focuse on more advanced testing endpoints
 COOKIE
-You can see that we have a few pages worth checking. The accessible ones like xss_vulnerable and unaccessible like user_sessions, custom_header, header_auth. Try to access them one by one via the URL to see what output you will get. For example try to input this URL: `http://localhost/user_session.php`. You can see that you will be redirected but let's try to test it using this curl command:
+You can see that we have a few pages worth checking. The accessible ones like `xss_vulnerable.php` /`rce/remote_code_execution.php` and unaccessible ones like `user_sessions.php`, `header_auth.php` and `custom_header.php`. Try to access them one by one via the URL to see what output you will get. For example try to input this URL: `http://localhost/user_session.php`. You can see that you will be redirected but let's try to test it using this curl command:
 <div class="code-snippet">
 <pre><code>curl http://localhost/user_session.php</code></pre>
 <button class="copy-button" onclick="copyToClipboard('url http://localhost/user_session.php')"></button>
