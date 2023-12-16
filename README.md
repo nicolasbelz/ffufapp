@@ -443,7 +443,7 @@ You can use this curl command to get a hint about which testing technique use fo
 <button class="copy-button" onclick="copyToClipboard('url http://localhost/admin/index.php')"></button>
 </div>
 
-Now you can see that we should use the [Parameter Fuzzing for GET and POST Requests](#parameter-fuzzing-for-get-and-post-requests). Use those methods to gain access to the `admin` panel.
+Now you can see that we should use the [Parameter Fuzzing for GET and POST Requests](#parameter-fuzzing-for-get-and-post-requests). Use those methods to gain access to the `/admin/index.php` panel.
 
 Correct commands:
 <div class="code-snippet">
@@ -455,9 +455,13 @@ Correct commands:
 <button class="copy-button" onclick="copyToClipboard('ffuf -w parameters.txt:FUZZ -u http://localhost/admin/index.php -X POST -d 'key=FUZZ' -H 'Content-Type: application/x-www-form-urlencoded')"></button>
 </div>
 
+Use this curl command to get a hint about which testing technique use for the `/admin/flagvalue.php`:
+<div class="code-snippet">
+<pre><code>curl http://localhost/admin/flagvalue.php</code></pre>
+<button class="copy-button" onclick="copyToClipboard('curl http://localhost/admin/flagvalue.php')"></button>
+</div>
 
-
-
+Now you can see that we should use the [Value Fuzzing](#value-fuzzing). Use this method to gain access to `/admin/flagvalue.php` file.
 
 
 
