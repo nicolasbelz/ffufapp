@@ -19,7 +19,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['key']) && $_POST['key
 // If the key is incorrect, send a 403 Forbidden status code
 if (!$is_authorized) {
     http_response_code(403);
-    echo "Forbidden: You do not have access to read the flag.";
+    echo "Forbidden: You do not have access to read the flag. Try to learn more about fuzzing parameters";
     exit; // Stop script execution
 }
 ?>
