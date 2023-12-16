@@ -7,6 +7,6 @@ if (isset($_SERVER['HTTP_X_CUSTOM_AUTH']) && $_SERVER['HTTP_X_CUSTOM_AUTH'] === 
     // Include sensitive content or operations here
 } else {
     http_response_code(401); // Unauthorized
-    echo "Authentication failed.";
+    echo "Authentication failed. Try Token Fuzzing to exploit the vulnerability";
 }
-echo "Try Custom Header Fuzzing to exploit the vulnerability";
+

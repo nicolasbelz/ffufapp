@@ -378,7 +378,7 @@ Correct command:
 <button class="copy-button" onclick="copyToClipboard('ffuf -w custom_header.txt -request request.txt -u http://localhost/custom_header.php')"></button>
 </div>
 
-Correct command different request:
+Correct command with a different request:
 <div class="code-snippet">
 <pre><code>ffuf -w test_values.txt -request test_request.txt -u http://localhost/custom_header.php</code></pre>
 <button class="copy-button" onclick="copyToClipboard('ffuf -w test_values.txt -request test_request.txt -u http://localhost/custom_header.php')"></button>
@@ -481,28 +481,61 @@ Correct command to list all IDs:
 </div>
 
 **Step 5** Focuse on more advanced testing endpoints
-COOKIE
 You can see that we have a few pages worth checking. The accessible ones like `xss_vulnerable.php` /`rce/remote_code_execution.php` and unaccessible ones like `user_sessions.php`, `header_auth.php` and `custom_header.php`. Try to access them one by one via the URL to see what output you will get. For example try to input this URL: `http://localhost/user_session.php`. You can see that you will be redirected but let's try to test it using this curl command:
 <div class="code-snippet">
 <pre><code>curl http://localhost/user_session.php</code></pre>
 <button class="copy-button" onclick="copyToClipboard('url http://localhost/user_session.php')"></button>
 </div>
 
-Check the response header with this `curl` command:
+Now you can see that we should use the [Cookie Fuzzing](#cookie-fuzzing). Use this method to gain access to `user_session.php` file.
+
+Correct command to use:
+<div class="code-snippet">
+<pre><code>ffuf -w cookie_values.txt -u http://localhost/user_session.php -H "Cookie: access_token=FUZZ" -v</code></pre>
+<button class="copy-button" onclick="copyToClipboard('ffuf -w cookie_values.txt -u http://localhost/user_session.php -H "Cookie: access_token=FUZZ" -v')"></button>
+</div>
+Curl command to access the session:
 <div class="code-snippet">
 <pre><code>curl -b "access_token=XJ92n%23k%403ZQ%218hT6v" http://localhost/user_session.php -v</code></pre>
 <button class="copy-button" onclick="copyToClipboard('curl -b "access_token=XJ92n%23k%403ZQ%218hT6v" http://localhost/user_session.php -v')"></button>
 </div>
 
-You can see that there is a hint which ffuf testing technique use, in this case the [Cookie Fuzzing](#cookie-fuzzing)
+Use this curl command to get a hint about which testing technique use for the `header_auth.php`:
+<div class="code-snippet">
+<pre><code>curl http://localhost/header_auth.php</code></pre>
+<button class="copy-button" onclick="copyToClipboard('curl http://localhost/header_auth.php')"></button>
+</div>
 
-More advanced analyse
+Now you can see that we should use the [Token Fuzzing](#token-fuzzing). Use this method to gain access to `header_auth.php` file.
+Correct command:
+<div class="code-snippet">
+<pre><code>ffuf -w tokens.txt -u http://localhost/header_auth.php -H "X-Custom-Auth: FUZZ"</code></pre>
+<button class="copy-button" onclick="copyToClipboard('ffuf -w tokens.txt -u http://localhost/header_auth.php -H "X-Custom-Auth: FUZZ"')"></button>
+</div>
+Curl command to access:
+<div class="code-snippet">
+<pre><code>curl -H "X-Custom-Auth: 4b82Km29Fv6zQ3xT8pW5Jr7Hn" http://localhost/header_auth.php</code></pre>
+<button class="copy-button" onclick="copyToClipboard('curl -H "X-Custom-Auth: 4b82Km29Fv6zQ3xT8pW5Jr7Hn" http://localhost/header_auth.php')"></button>
+</div>
 
-Cookie FUzzing
+Use this curl command to get a hint about which testing technique use for the `custom_header.php`:
+<div class="code-snippet">
+<pre><code>curl http://localhost/custom_header.php</code></pre>
+<button class="copy-button" onclick="copyToClipboard('curl http://localhost/custom_header.php')"></button>
+</div>
 
-Token fuzzing
+Now you can see that we should use the [Custom Header Fuzzing](#custom-header-fuzzing). Use this method to gain access to `custom_header.php` file.
+Correct command:
+<div class="code-snippet">
+<pre><code>ffuf -w custom_header.txt -request request.txt -u http://localhost/custom_header.php</code></pre>
+<button class="copy-button" onclick="copyToClipboard('ffuf -w custom_header.txt -request request.txt -u http://localhost/custom_header.php')"></button>
+</div>
 
-Custom header
+Correct command with a different request:
+<div class="code-snippet">
+<pre><code>ffuf -w test_values.txt -request test_request.txt -u http://localhost/custom_header.php</code></pre>
+<button class="copy-button" onclick="copyToClipboard('ffuf -w test_values.txt -request test_request.txt -u http://localhost/custom_header.php')"></button>
+</div>
 
 
 ## License
