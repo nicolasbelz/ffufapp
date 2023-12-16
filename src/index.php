@@ -15,14 +15,14 @@
         <li><a href="login.php">Login</a></li>
         <li><a href="contact.php">Contact</a></li>
         <li><a href="about/">About</a></li>
-        <li><a href="admin/">Admin</a></li>
+
         <li><a href="api/v1/users.php">API v1</a></li>
         <li><a href="api/v2/users.php">API v2</a></li>
     </ul>
 </div>
 
 <div id="sidebar">
-    <a href="sql_injection.php">SQL Injection</a>
+    <li><a href="admin/">Admin</a></li>
     <a href="xss_vulnerable.php">XSS Vulnerable</a>
     <a href="rce/remote_code_execution.php">Remote Code Execution</a>
 </div>
