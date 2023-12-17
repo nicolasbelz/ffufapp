@@ -232,8 +232,6 @@ Correct command with verbose output:
 <button class="copy-button" onclick="copyToClipboard('ffuf -w list.txt:FUZZ -u http://localhost/FUZZ -e .php -v')"></button>
 </div>
 
-Includes file extensions in fuzzing and provides verbose output with `-e` and `-v` flags for detailed analysis.
-
 ---
 
 ### Recursive Fuzzing
@@ -430,7 +428,7 @@ Use this command:
 <pre><code>ffuf -w list.txt:FUZZ -u http://localhost/FUZZ -e .php -v</code></pre>
 <button class="copy-button" onclick="copyToClipboard('ffuf -w list.txt:FUZZ -u http://localhost/FUZZ -e .php -v')"></button>
 </div>
-If you want to learn more about this technique click here: [Directory and Page Fuzzing with Extensions](#directory-and-page-fuzzing-with-extensions)
+If you want to learn more about this technique click here: [Directory and Page Fuzzing with Extensions](#directory-and-page-fuzzing-with-extensions) 
 
 
 **Step 3** Try to do some [Recursive Fuzzing](#recursive-fuzzing) and explore all possible parts of the web application. 
@@ -544,6 +542,6 @@ Curl command to access:
 </div>
 
 ## License
-License information for the project.
+License information for the project. For learning puproses only.
 
 
