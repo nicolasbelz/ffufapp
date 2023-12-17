@@ -10,7 +10,7 @@
    - [Start lab environment](#start-lab-environment)
 4. [Usage](#usage)
    - [Directory Fuzzing](#directory-fuzzing)
-   - [Page Fuzzing](#page_fuzzing)
+   - [Page Fuzzing](#page-fuzzing)
    - [Directory and Page Fuzzing with Extensions](#directory-and-page-fuzzing-with-extensions)
    - [Recursive Fuzzing](#recursive-fuzzing)
    - [Parameter Fuzzing for GET and POST Requests](#parameter-fuzzing-for-get-and-post-requests)
@@ -428,7 +428,7 @@ Use this command:
 <pre><code>ffuf -w list.txt:FUZZ -u http://localhost/FUZZ -e .php -v</code></pre>
 <button class="copy-button" onclick="copyToClipboard('ffuf -w list.txt:FUZZ -u http://localhost/FUZZ -e .php -v')"></button>
 </div>
-If you want to learn more about this technique click here: [Directory and Page Fuzzing with Extensions](#directory-and-page-fuzzing-with-extensions) 
+If you want to learn more about this technique click here [Directory and Page Fuzzing with Extensions](#directory-and-page-fuzzing-with-extensions)
 
 
 **Step 3** Try to do some [Recursive Fuzzing](#recursive-fuzzing) and explore all possible parts of the web application. 
