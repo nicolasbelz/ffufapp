@@ -541,6 +541,70 @@ Curl command to access:
 <button class="copy-button" onclick="copyToClipboard('curl -X POST http://localhost/custom_header.php -H "X-Custom-Header: testheader" -H "Content-Type: application/x-www-form-urlencoded" -d "key=secretValue"')"></button>
 </div>
 
+
+<div class="code-snippet">
+<pre><code></code></pre>
+<button class="copy-button" onclick="copyToClipboard('')"></button>
+</div>
+
+## Learning Scenario: Web Application Fuzzing v2
+Step 1: Directory Fuzzing
+Begin with discovering directories in the web application.
+<div class="code-snippet">
+<pre><code>ffuf -w list.txt:FUZZ -u http://localhost/FUZZ</code></pre>
+<button class="copy-button" onclick="copyToClipboard('ffuf -w list.txt:FUZZ -u http://localhost/FUZZ')"></button>
+</div>
+
+Observation:
+Notice directories like config, rce, api, and especially admin.
+Step 2: Page Fuzzing
+Fuzz for pages within directories to explore further.
+
+<div class="code-snippet">
+<pre><code>ffuf -w list.txt:FUZZ -u http://localhost/FUZZ -e .php -v</code></pre>
+<button class="copy-button" onclick="copyToClipboard('ffuf -w list.txt:FUZZ -u http://localhost/FUZZ -e .php -v')"></button>
+</div>
+
+Learn More: Directory and Page Fuzzing with Extensions
+
+Step 3: Recursive Fuzzing
+Explore all possible parts of the web application.
+<div class="code-snippet">
+<pre><code>ffuf -w list.txt:FUZZ -u http://localhost/FUZZ -recursion -recursion-depth 2</code></pre>
+<button class="copy-button" onclick="copyToClipboard('ffuf -w list.txt:FUZZ -u http://localhost/FUZZ -recursion -recursion-depth 2')"></button>
+</div>
+<div class="code-snippet">
+<pre><code>ffuf -w list.txt:FUZZ -u http://localhost/FUZZ -recursion -recursion-depth 2 -e .php</code></pre>
+<button class="copy-button" onclick="copyToClipboard('ffuf -w list.txt:FUZZ -u http://localhost/FUZZ -recursion -recursion-depth 2 -e .php')"></button>
+</div>
+
+
+Step 4: Identifying Attack Vectors
+Focus on vulnerable parts of the web application.
+Observation:
+After fuzzing the admin directory, certain pages like index.php and flagvalue.php are not accessible, while `settings.php`, `/users/index.php`, and `/users/profile.php` are accessible, indicating potential vulnerabilities.
+Hint Acquisition:
+<div class="code-snippet">
+<pre><code>curl http://localhost/admin/index.php</code></pre>
+<button class="copy-button" onclick="copyToClipboard('curl http://localhost/admin/index.php')"></button>
+</div>
+
+Parameter Fuzzing:
+Apply GET and POST requests fuzzing on /admin/index.php
+<div class="code-snippet">
+<pre><code>ffuf -w parameters.txt:FUZZ -u http://localhost/admin/index.php?key=FUZZ</code></pre>
+<button class="copy-button" onclick="copyToClipboard('ffuf -w parameters.txt:FUZZ -u http://localhost/admin/index.php?key=FUZZ')"></button>
+</div>
+
+<div class="code-snippet">
+<pre><code>ffuf -w parameters.txt:FUZZ -u http://localhost/admin/index.php -X POST -d 'key=FUZZ' -H 'Content-Type: application/x-www-form-urlencoded'</code></pre>
+<button class="copy-button" onclick="copyToClipboard('ffuf -w parameters.txt:FUZZ -u http://localhost/admin/index.php -X POST -d 'key=FUZZ' -H 'Content-Type: application/x-www-form-urlencoded'')"></button>
+</div>
+
+Step 5: Advanced Testing Endpoints
+Test various accessible and inaccessible pages.
+
+
 ## License
 License information for the project. For learning puproses only.
 
