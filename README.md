@@ -542,14 +542,11 @@ Curl command to access:
 </div>
 
 
-<div class="code-snippet">
-<pre><code></code></pre>
-<button class="copy-button" onclick="copyToClipboard('')"></button>
-</div>
+
 
 ## Learning Scenario: Web Application Fuzzing v2
 Step 1: Directory Fuzzing
-Begin with discovering directories in the web application.
+This step aims to uncover hidden or unlisted directories in the web application. These directories might contain sensitive information or administrative interfaces. Begin with discovering directories in the web application.
 <div class="code-snippet">
 <pre><code>ffuf -w list.txt:FUZZ -u http://localhost/FUZZ</code></pre>
 <button class="copy-button" onclick="copyToClipboard('ffuf -w list.txt:FUZZ -u http://localhost/FUZZ')"></button>
@@ -558,7 +555,7 @@ Begin with discovering directories in the web application.
 Observation:
 Notice directories like config, rce, api, and especially admin.
 Step 2: Page Fuzzing
-Fuzz for pages within directories to explore further.
+Fuzz for pages within directories to explore further. 
 
 <div class="code-snippet">
 <pre><code>ffuf -w list.txt:FUZZ -u http://localhost/FUZZ -e .php -v</code></pre>
@@ -568,7 +565,7 @@ Fuzz for pages within directories to explore further.
 Learn More: Directory and Page Fuzzing with Extensions
 
 Step 3: Recursive Fuzzing
-Explore all possible parts of the web application.
+Explore all possible parts of the web application. Go beyond the first level of directories and files to explore deeper nested structures.
 <div class="code-snippet">
 <pre><code>ffuf -w list.txt:FUZZ -u http://localhost/FUZZ -recursion -recursion-depth 2</code></pre>
 <button class="copy-button" onclick="copyToClipboard('ffuf -w list.txt:FUZZ -u http://localhost/FUZZ -recursion -recursion-depth 2')"></button>
@@ -580,7 +577,7 @@ Explore all possible parts of the web application.
 
 
 Step 4: Identifying Attack Vectors
-Focus on vulnerable parts of the web application.
+Focus on vulnerable parts of the web application. Use the information gathered from previous steps to pinpoint specific areas that might be vulnerable to different types of attacks.
 Observation:
 After fuzzing the admin directory, certain pages like index.php and flagvalue.php are not accessible, while `settings.php`, `/users/index.php`, and `/users/profile.php` are accessible, indicating potential vulnerabilities.
 Hint Acquisition:
@@ -602,10 +599,89 @@ Apply GET and POST requests fuzzing on /admin/index.php
 </div>
 
 Step 5: Advanced Testing Endpoints
-Test various accessible and inaccessible pages.
+Test various accessible and inaccessible pages. Apply specialized testing techniques to different types of endpoints discovered in the application, including those that require authentication or specific headers.
 
+In this step, focus on advanced testing techniques for various web pages, including those that are both accessible and inaccessible. This process helps identify potential vulnerabilities in different parts of the web application.
 
+Objective:
+The goal is to understand how different endpoints react to various testing methods and to identify security flaws or misconfigurations in the application.
+Accessible Pages:
+Start with pages like xss_vulnerable.php, /rce/remote_code_execution.php. These pages might be vulnerable to specific attacks like Cross-Site Scripting (XSS) or Remote Code Execution (RCE).
+Action:
+Try different input values in these pages' URL parameters or forms to see how the application responds. Look for indications of script execution or unexpected behaviors.
+
+Inaccessible Pages:
+Focus on pages like user_sessions.php, header_auth.php, and custom_header.php. These pages are not directly accessible, indicating they might require specific authentication or headers.
+
+Hint Acquisition:
+Initially, use the curl command to explore HTTP responses:
+<div class="code-snippet">
+<pre><code>curl http://localhost/user_session.php</code></pre>
+<button class="copy-button" onclick="copyToClipboard('curl http://localhost/user_session.php')"></button>
+</div>
+
+Observations:
+Note down the response headers, status codes, and any error messages. These details can give clues about the required authentication mechanism or other access controls.
+
+Cookie Fuzzing:
+This method targets how the application handles cookies, which are often used for session management.
+
+Testing 'user_session.php':
+<div class="code-snippet">
+<pre><code>ffuf -w cookie_values.txt -u http://localhost/user_session.php -H "Cookie: access_token=FUZZ" -v</code></pre>
+<button class="copy-button" onclick="copyToClipboard('ffuf -w cookie_values.txt -u http://localhost/user_session.php -H "Cookie: access_token=FUZZ" -v')"></button>
+</div>
+
+Using curl to Test Valid Session Tokens:
+<div class="code-snippet">
+<pre><code>curl -b "access_token=XJ92n%23k%403ZQ%218hT6v" http://localhost/user_session.php -v</code></pre>
+<button class="copy-button" onclick="copyToClipboard('curl -b "access_token=XJ92n%23k%403ZQ%218hT6v" http://localhost/user_session.php -v')"></button>
+</div>
+
+Learning Outcome:
+Understand how the application validates session cookies and identify any weaknesses in session management.
+
+Token Fuzzing:
+Focuses on how the application validates custom authentication tokens.
+
+Targeting 'header_auth.php':
+<div class="code-snippet">
+<pre><code>ffuf -w tokens.txt -u http://localhost/header_auth.php -H "X-Custom-Auth: FUZZ"</code></pre>
+<button class="copy-button" onclick="copyToClipboard('ffuf -w tokens.txt -u http://localhost/header_auth.php -H "X-Custom-Auth: FUZZ"')"></button>
+</div>
+
+Direct Testing with curl:
+<div class="code-snippet">
+<pre><code>curl -H "X-Custom-Auth: 4b82Km29Fv6zQ3xT8pW5Jr7Hn" http://localhost/header_auth.php</code></pre>
+<button class="copy-button" onclick="copyToClipboard('curl -H "X-Custom-Auth: 4b82Km29Fv6zQ3xT8pW5Jr7Hn" http://localhost/header_auth.php')"></button>
+</div>
+Learning Outcome:
+Identify if the custom tokens are validated securely and if there are ways to bypass this authentication.
+
+Custom Header Fuzzing:
+Tests the application's handling of non-standard HTTP headers.
+Commands for 'custom_header.php':
+<div class="code-snippet">
+<pre><code>ffuf -w custom_header.txt -request request.txt -u http://localhost/custom_header.php</code></pre>
+<button class="copy-button" onclick="copyToClipboard('ffuf -w custom_header.txt -request request.txt -u http://localhost/custom_header.php')"></button>
+</div>
+<div class="code-snippet">
+<pre><code>ffuf -w test_values.txt -request test_request.txt -u http://localhost/custom_header.php</code></pre>
+<button class="copy-button" onclick="copyToClipboard('ffuf -w test_values.txt -request test_request.txt -u http://localhost/custom_header.php')"></button>
+</div>
+
+Curl Command for Direct Access:
+<div class="code-snippet">
+<pre><code>curl -X POST http://localhost/custom_header.php -H "X-Custom-Header: testheader" -H "Content-Type: application/x-www-form-urlencoded" -d "key=secretValue"</code></pre>
+<button class="copy-button" onclick="copyToClipboard('curl -X POST http://localhost/custom_header.php -H "X-Custom-Header: testheader" -H "Content-Type: application/x-www-form-urlencoded" -d "key=secretValue"')"></button>
+</div>
+Learning Outcome:
+Gain insights into how custom headers are processed and if they can be exploited.
 ## License
 License information for the project. For learning puproses only.
 
 
+<div class="code-snippet">
+<pre><code></code></pre>
+<button class="copy-button" onclick="copyToClipboard('')"></button>
+</div>
