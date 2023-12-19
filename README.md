@@ -561,11 +561,12 @@ Curl Command for Direct Access:
 </div>
 Learning Outcome:
 Gain insights into how custom headers are processed and if they can be exploited.
+
 ## License
 License information for the project. For learning puproses only.
 
 
-<div class="code-snippet">
+<!-- <div class="code-snippet">
 <pre><code></code></pre>
 <button class="copy-button" onclick="copyToClipboard('')"></button>
-</div>
+</div> -->
