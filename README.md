@@ -411,7 +411,7 @@ This README provides a clear guide to using ffuf for penetration testing, includ
 ---
 
 ## Learning Scenario
-Step 1: [Directory Fuzzing](#directory-fuzzing)
+**Step 1:** [Directory Fuzzing](#directory-fuzzing)
 
 This step aims to uncover hidden or unlisted directories in the web application. These directories might contain sensitive information or administrative interfaces. Begin with discovering directories in the web application.
 <div class="code-snippet">
@@ -424,7 +424,7 @@ Observation:
 Notice directories like `config`, `rce`, `api`, and especially `admin`. The `admin` directory often contains administrative controls and sensitive functionalities of the web application. It's a critical area that could provide extensive control over the application if compromised. Unauthorized access to the `admin` panel can lead to severe security breaches, including data theft, site defacement, and complete system takeover.  Once you identify an `admin` directory, prioritize it for in-depth exploration. It's a high-value target for attackers, so understanding its security is crucial. Use specialized fuzzing techniques to uncover hidden pages or functionalities within the `admin` panel. 
 
 
-Step 2: [Page Fuzzing](#page_fuzzing)
+**Step 2:** [Page Fuzzing](#page_fuzzing)
 
 Fuzz for pages within directories to explore further. 
 
@@ -437,7 +437,7 @@ Observation:
 After running Page FUzzing you should have found these pages: index, header, xss_vulnerable, custom_header, user_session, footer, contact, header_auth, login.
 Learn More: [Directory and Page Fuzzing with Extensions](#directory-and-page-fuzzing-with-extensions)
 
-Step 3: [Recursive Fuzzing](#recursive-fuzzing)
+**Step 3:** [Recursive Fuzzing](#recursive-fuzzing)
 
 Explore all possible parts of the web application. Go beyond the first level of directories and files to explore deeper nested structures. Methodically search through nested directories. Start with broader directories and progressively drill down to more specific paths.
 <div class="code-snippet">
@@ -452,7 +452,7 @@ Observation:
 
 You should have found many direcorties, subdirectories and pages with `php` and `css` extensions. After fuzzing the admin directory, certain pages like `index.php` and `flagvalue.php` are not accessible, while `settings.php`, `/users/index.php`, and `/users/profile.php` are accessible, indicating potential vulnerabilities.
 
-Step 4: Identifying Attack Vectors
+**Step 4:** Identifying Attack Vectors
 
 Focus on vulnerable parts of the web application. Use the information gathered from previous steps to pinpoint specific areas that might be vulnerable to different types of attacks.
 
@@ -494,7 +494,7 @@ Correct command to list all IDs:
 </div>
 
 
-Step 5: Advanced Testing Endpoints
+**Step 5:** Advanced Testing Endpoints
 Test various accessible and inaccessible pages. Apply specialized testing techniques to different types of endpoints discovered in the application, including those that require authentication or specific headers.
 
 In this step, focus on advanced testing techniques for various web pages, including those that are both accessible and inaccessible. This process helps identify potential vulnerabilities in different parts of the web application.
