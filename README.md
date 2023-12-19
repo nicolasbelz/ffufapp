@@ -437,7 +437,7 @@ Observation:
 After running Page FUzzing you should have found these pages: index, header, xss_vulnerable, custom_header, user_session, footer, contact, header_auth, login.
 Learn More: [Directory and Page Fuzzing with Extensions](#directory-and-page-fuzzing-with-extensions)
 
-Step 3: Recursive Fuzzing
+Step 3: [Recursive Fuzzing](#recursive-fuzzing)
 
 Explore all possible parts of the web application. Go beyond the first level of directories and files to explore deeper nested structures. Methodically search through nested directories. Start with broader directories and progressively drill down to more specific paths.
 <div class="code-snippet">
@@ -448,8 +448,8 @@ Explore all possible parts of the web application. Go beyond the first level of 
 <pre><code>ffuf -w list.txt:FUZZ -u http://localhost/FUZZ -recursion -recursion-depth 2 -e .php</code></pre>
 <button class="copy-button" onclick="copyToClipboard('ffuf -w list.txt:FUZZ -u http://localhost/FUZZ -recursion -recursion-depth 2 -e .php')"></button>
 </div>
-
 Observation:
+
 You should have found many direcorties, subdirectories and pages with `php` and `css` extensions. After fuzzing the admin directory, certain pages like `index.php` and `flagvalue.php` are not accessible, while `settings.php`, `/users/index.php`, and `/users/profile.php` are accessible, indicating potential vulnerabilities.
 
 Step 4: Identifying Attack Vectors
@@ -461,9 +461,11 @@ Hint Acquisition:
 <pre><code>curl http://localhost/admin/index.php</code></pre>
 <button class="copy-button" onclick="copyToClipboard('curl http://localhost/admin/index.php')"></button>
 </div>
+Observation:
+
 You can see that you should use parameter fuzzing testing technique.
 
-Parameter Fuzzing:
+[Parameter Fuzzing for GET and POST Requests](#parameter-fuzzing-for-get-and-post-requests)
 Apply GET and POST requests fuzzing on /admin/index.php
 <div class="code-snippet">
 <pre><code>ffuf -w parameters.txt:FUZZ -u http://localhost/admin/index.php?key=FUZZ</code></pre>
@@ -481,6 +483,7 @@ Hint Acquisition about `/admin/flagvalue.php`:
 <pre><code>curl http://localhost/admin/flagvalue.php</code></pre>
 <button class="copy-button" onclick="copyToClipboard('curl http://localhost/admin/flagvalue.php')"></button>
 </div>
+Observation:
 
 Now you can see that we should use the [Value Fuzzing](#value-fuzzing). Use this method to gain access to `/admin/flagvalue.php` file.
 
@@ -522,7 +525,7 @@ Observations:
 
 Note down the response headers, status codes, and any error messages. These details can give clues about the required authentication mechanism or other access controls.
 
-Cookie Fuzzing:
+[Cookie Fuzzing](#cookie-fuzzing):
 
 This method targets how the application handles cookies, which are often used for session management.
 
@@ -542,11 +545,11 @@ Learning Outcome:
 
 Understand how the application validates session cookies and identify any weaknesses in session management.
 
-Token Fuzzing:
+[Token Fuzzing](#token-fuzzing):
 
 Focuses on how the application validates custom authentication tokens.
 
-Targeting 'header_auth.php':
+Targeting `header_auth.php`:
 <div class="code-snippet">
 <pre><code>ffuf -w tokens.txt -u http://localhost/header_auth.php -H "X-Custom-Auth: FUZZ"</code></pre>
 <button class="copy-button" onclick="copyToClipboard('ffuf -w tokens.txt -u http://localhost/header_auth.php -H "X-Custom-Auth: FUZZ"')"></button>
@@ -561,7 +564,12 @@ Learning Outcome:
 
 Identify if the custom tokens are validated securely and if there are ways to bypass this authentication.
 
-Custom Header Fuzzing:
+[Custom Header Fuzzing](#custom-header-fuzzing):
+Understanding the Custom Header Method:
+Custom headers, like `X-Custom-Header`, are often used by web applications for various purposes, including authentication, feature control, or internal tracking. Manipulating these headers can reveal how the server processes them, potentially uncovering security flaws. The wordlist `custom_header.txt` will contain various values that ffuf will inject in place of FUZZ in the `X-Custom-Header`. The goal is to try different header values to see how the server responds, looking for anything out of the ordinary that could indicate a vulnerability. Ensure your wordlist `custom_header.txt` includes a variety of header values. These could be common tokens, known patterns, or even unexpected or malformed inputs. Example values might include standard tokens, random strings, or special characters. The request file defines the HTTP request format. `FUZZ` will be replaced by each entry in your wordlist. `POST /custom_header.php HTTP/1.1` initiates a `POST` request to `custom_header.php`. `Content-Length: 13` indicates the length of the body. If you change the body content, adjust this value accordingly.
+
+Analyzing Responses:
+Monitor how the server responds to each modified header. Look for changes in status codes, error messages, or any other output that differs from the norm. A successful fuzz might show an unintended server behavior, error messages revealing server info, or even a full response indicating a successful exploitation.
 
 Tests the application's handling of non-standard HTTP headers.
 Commands for `custom_header.php`:
