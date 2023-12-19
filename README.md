@@ -565,7 +565,9 @@ Learning Outcome:
 Identify if the custom tokens are validated securely and if there are ways to bypass this authentication.
 
 [Custom Header Fuzzing](#custom-header-fuzzing):
+
 Understanding the Custom Header Method:
+
 Custom headers, like `X-Custom-Header`, are often used by web applications for various purposes, including authentication, feature control, or internal tracking. Manipulating these headers can reveal how the server processes them, potentially uncovering security flaws. The wordlist `custom_header.txt` will contain various values that ffuf will inject in place of FUZZ in the `X-Custom-Header`. The goal is to try different header values to see how the server responds, looking for anything out of the ordinary that could indicate a vulnerability. Ensure your wordlist `custom_header.txt` includes a variety of header values. These could be common tokens, known patterns, or even unexpected or malformed inputs. Example values might include standard tokens, random strings, or special characters. The request file defines the HTTP request format. `FUZZ` will be replaced by each entry in your wordlist. `POST /custom_header.php HTTP/1.1` initiates a `POST` request to `custom_header.php`. `Content-Length: 13` indicates the length of the body. If you change the body content, adjust this value accordingly.
 
 Analyzing Responses:
@@ -589,7 +591,7 @@ Curl Command for Direct Access:
 </div>
 Learning Outcome:
 
-Gain insights into how custom headers are processed and if they can be exploited.
+Gain insights into how custom headers are processed and if they can be exploited. By using a correct payload you should gain access to the `custom_header.php` page.
 
 ## License
 License information for the project. For learning puproses only.
