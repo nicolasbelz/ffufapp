@@ -409,143 +409,9 @@ Each method is crafted to test for different vulnerabilities, with the placement
 This README provides a clear guide to using ffuf for penetration testing, including detailed code snippets for each type of fuzzing technique.
 
 ---
+
 ## Learning Scenario
-**Step 1** To fuzz succesfully a web application we should start with [Directory Fuzzing](#directory-fuzzing).
-
-Run this command to discover the directories in the web app:
-<div class="code-snippet">
-<pre><code>ffuf -w list.txt:FUZZ -u http://localhost/FUZZ</code></pre>
-<button class="copy-button" onclick="copyToClipboard('ffuf -w list.txt:FUZZ -u http://localhost/FUZZ')"></button>
-</div>
-
-You can see that there are a few directories worth testing: `config`, `rce`, `api` and especially the `admin` directory.
-
-**Step 2** Start fuzzing for pages in this level of direcories to see what you can find with [Page Fuzzing](#page_fuzzing).
-
-Use this command:
-<div class="code-snippet">page_fuzzingrecursive fuzzing and pages with a verbose output:
-<div class="code-snippet">
-<pre><code>ffuf -w list.txt:FUZZ -u http://localhost/FUZZ -e .php -v</code></pre>
-<button class="copy-button" onclick="copyToClipboard('ffuf -w list.txt:FUZZ -u http://localhost/FUZZ -e .php -v')"></button>
-</div>
-If you want to learn more about this technique click here [Directory and Page Fuzzing with Extensions](#directory-and-page-fuzzing-with-extensions)
-
-
-**Step 3** Try to do some [Recursive Fuzzing](#recursive-fuzzing) and explore all possible parts of the web application. 
-Correect commands:
-<div class="code-snippet">
-<pre><code>ffuf -w list.txt:FUZZ -u http://localhost/FUZZ -recursion -recursion-depth 2</code></pre>
-<button class="copy-button" onclick="copyToClipboard('ffuf -w list.txt:FUZZ -u http://localhost/FUZZ -recursion -recursion-depth 2')"></button>
-</div>
-<div class="code-snippet">
-<pre><code>ffuf -w list.txt:FUZZ -u http://localhost/FUZZ -recursion -recursion-depth 2 -e .php</code></pre>
-<button class="copy-button" onclick="copyToClipboard('ffuf -w list.txt:FUZZ -u http://localhost/FUZZ -recursion -recursion-depth 2 -e .php')"></button>
-</div>
-
-**Step 4** Focus on potential vectors of attack on vulnerable parts of the webapp.
-
-You can see that after fuzzing the `admin` directory you get `index.php` and `flagvalue.php` which you cannot access and `settings.php`, `/users/index.php`, `/users/profile.php` which you can access. It shows that the webapp is not secure in those parts.
-
-You can use this curl command to get a hint about which testing technique use for the `/admin/index.php`:
-<div class="code-snippet">
-<pre><code>curl http://localhost/admin/index.php</code></pre>
-<button class="copy-button" onclick="copyToClipboard('url http://localhost/admin/index.php')"></button>
-</div>
-
-Now you can see that we should use the [Parameter Fuzzing for GET and POST Requests](#parameter-fuzzing-for-get-and-post-requests). Use those methods to gain access to the `/admin/index.php` panel.
-
-Correct commands:
-<div class="code-snippet">
-<pre><code>ffuf -w parameters.txt:FUZZ -u http://localhost/admin/index.php?key=FUZZ</code></pre>
-<button class="copy-button" onclick="copyToClipboard('ffuf -w parameters.txt:FUZZ -u http://localhost/admin/index.php?key=FUZZ')"></button>
-</div>
-<div class="code-snippet">
-<pre><code>ffuf -w parameters.txt:FUZZ -u http://localhost/admin/index.php -X POST -d 'key=FUZZ' -H 'Content-Type: application/x-www-form-urlencoded'</code></pre>
-<button class="copy-button" onclick="copyToClipboard('ffuf -w parameters.txt:FUZZ -u http://localhost/admin/index.php -X POST -d 'key=FUZZ' -H 'Content-Type: application/x-www-form-urlencoded')"></button>
-</div>
-
-Use this curl command to get a hint about which testing technique use for the `/admin/flagvalue.php`:
-<div class="code-snippet">
-<pre><code>curl http://localhost/admin/flagvalue.php</code></pre>
-<button class="copy-button" onclick="copyToClipboard('curl http://localhost/admin/flagvalue.php')"></button>
-</div>
-
-Now you can see that we should use the [Value Fuzzing](#value-fuzzing). Use this method to gain access to `/admin/flagvalue.php` file.
-
-Correct command to list all IDs:
-<div class="code-snippet">
-<pre><code>ffuf -w ids.txt:FUZZ -u http://localhost/admin/flagvalue.php -X POST -d 'id=FUZZ' -H 'Content-Type: application/x-www-form-urlencoded'</code></pre>
-<button class="copy-button" onclick="copyToClipboard('ffuf -w ids.txt:FUZZ -u http://localhost/admin/flagvalue.php -X POST -d 'id=FUZZ' -H 'Content-Type: application/x-www-form-urlencoded')"></button>
-</div>
-
-**Step 5** Focuse on more advanced testing endpoints
-You can see that we have a few pages worth checking. The accessible ones like `xss_vulnerable.php` /`rce/remote_code_execution.php` and unaccessible ones like `user_sessions.php`, `header_auth.php` and `custom_header.php`. Try to access them one by one via the URL to see what output you will get. For example try to input this URL: `http://localhost/user_session.php`. You can see that you will be redirected but let's try to test it using this curl command:
-<div class="code-snippet">
-<pre><code>curl http://localhost/user_session.php</code></pre>
-<button class="copy-button" onclick="copyToClipboard('url http://localhost/user_session.php')"></button>
-</div>
-
-Now you can see that we should use the [Cookie Fuzzing](#cookie-fuzzing). Use this method to gain access to `user_session.php` file.
-
-Correct command to use:
-<div class="code-snippet">
-<pre><code>ffuf -w cookie_values.txt -u http://localhost/user_session.php -H "Cookie: access_token=FUZZ" -v</code></pre>
-<button class="copy-button" onclick="copyToClipboard('ffuf -w cookie_values.txt -u http://localhost/user_session.php -H "Cookie: access_token=FUZZ" -v')"></button>
-</div>
-Curl command to access the session:
-<div class="code-snippet">
-<pre><code>curl -b "access_token=XJ92n%23k%403ZQ%218hT6v" http://localhost/user_session.php -v</code></pre>
-<button class="copy-button" onclick="copyToClipboard('curl -b "access_token=XJ92n%23k%403ZQ%218hT6v" http://localhost/user_session.php -v')"></button>
-</div>
-
-Use this curl command to get a hint about which testing technique use for the `header_auth.php`:
-<div class="code-snippet">
-<pre><code>curl http://localhost/header_auth.php</code></pre>
-<button class="copy-button" onclick="copyToClipboard('curl http://localhost/header_auth.php')"></button>
-</div>
-
-Now you can see that we should use the [Token Fuzzing](#token-fuzzing). Use this method to gain access to `header_auth.php` file.
-Correct command:
-<div class="code-snippet">
-<pre><code>ffuf -w tokens.txt -u http://localhost/header_auth.php -H "X-Custom-Auth: FUZZ"</code></pre>
-<button class="copy-button" onclick="copyToClipboard('ffuf -w tokens.txt -u http://localhost/header_auth.php -H "X-Custom-Auth: FUZZ"')"></button>
-</div>
-Curl command to access:
-<div class="code-snippet">
-<pre><code>curl -H "X-Custom-Auth: 4b82Km29Fv6zQ3xT8pW5Jr7Hn" http://localhost/header_auth.php</code></pre>
-<button class="copy-button" onclick="copyToClipboard('curl -H "X-Custom-Auth: 4b82Km29Fv6zQ3xT8pW5Jr7Hn" http://localhost/header_auth.php')"></button>
-</div>
-
-Use this curl command to get a hint about which testing technique use for the `custom_header.php`:
-<div class="code-snippet">
-<pre><code>curl http://localhost/custom_header.php</code></pre>
-<button class="copy-button" onclick="copyToClipboard('curl http://localhost/custom_header.php')"></button>
-</div>
-
-Now you can see that we should use the [Custom Header Fuzzing](#custom-header-fuzzing). Use this method to gain access to `custom_header.php` file.
-Correct command:
-<div class="code-snippet">
-<pre><code>ffuf -w custom_header.txt -request request.txt -u http://localhost/custom_header.php</code></pre>
-<button class="copy-button" onclick="copyToClipboard('ffuf -w custom_header.txt -request request.txt -u http://localhost/custom_header.php')"></button>
-</div>
-
-Correct command with a different request:
-<div class="code-snippet">
-<pre><code>ffuf -w test_values.txt -request test_request.txt -u http://localhost/custom_header.php</code></pre>
-<button class="copy-button" onclick="copyToClipboard('ffuf -w test_values.txt -request test_request.txt -u http://localhost/custom_header.php')"></button>
-</div>
-
-Curl command to access:
-<div class="code-snippet">
-<pre><code>curl -X POST http://localhost/custom_header.php -H "X-Custom-Header: testheader" -H "Content-Type: application/x-www-form-urlencoded" -d "key=secretValue"</code></pre>
-<button class="copy-button" onclick="copyToClipboard('curl -X POST http://localhost/custom_header.php -H "X-Custom-Header: testheader" -H "Content-Type: application/x-www-form-urlencoded" -d "key=secretValue"')"></button>
-</div>
-
-
-
-
-## Learning Scenario: Web Application Fuzzing v2
-Step 1: Directory Fuzzing
+Step 1: [Directory Fuzzing](#directory-fuzzing)
 This step aims to uncover hidden or unlisted directories in the web application. These directories might contain sensitive information or administrative interfaces. Begin with discovering directories in the web application.
 <div class="code-snippet">
 <pre><code>ffuf -w list.txt:FUZZ -u http://localhost/FUZZ</code></pre>
@@ -554,7 +420,7 @@ This step aims to uncover hidden or unlisted directories in the web application.
 
 Observation:
 Notice directories like config, rce, api, and especially admin.
-Step 2: Page Fuzzing
+Step 2: [Page Fuzzing](#page_fuzzing)
 Fuzz for pages within directories to explore further. 
 
 <div class="code-snippet">
@@ -562,7 +428,7 @@ Fuzz for pages within directories to explore further.
 <button class="copy-button" onclick="copyToClipboard('ffuf -w list.txt:FUZZ -u http://localhost/FUZZ -e .php -v')"></button>
 </div>
 
-Learn More: Directory and Page Fuzzing with Extensions
+Learn More: [Directory and Page Fuzzing with Extensions](#directory-and-page-fuzzing-with-extensions)
 
 Step 3: Recursive Fuzzing
 Explore all possible parts of the web application. Go beyond the first level of directories and files to explore deeper nested structures.
@@ -579,12 +445,14 @@ Explore all possible parts of the web application. Go beyond the first level of 
 Step 4: Identifying Attack Vectors
 Focus on vulnerable parts of the web application. Use the information gathered from previous steps to pinpoint specific areas that might be vulnerable to different types of attacks.
 Observation:
-After fuzzing the admin directory, certain pages like index.php and flagvalue.php are not accessible, while `settings.php`, `/users/index.php`, and `/users/profile.php` are accessible, indicating potential vulnerabilities.
+After fuzzing the admin directory, certain pages like `index.php` and `flagvalue.php` are not accessible, while `settings.php`, `/users/index.php`, and `/users/profile.php` are accessible, indicating potential vulnerabilities.
+
 Hint Acquisition:
 <div class="code-snippet">
 <pre><code>curl http://localhost/admin/index.php</code></pre>
 <button class="copy-button" onclick="copyToClipboard('curl http://localhost/admin/index.php')"></button>
 </div>
+You can see that you should use parameter fuzzing testing technique.
 
 Parameter Fuzzing:
 Apply GET and POST requests fuzzing on /admin/index.php
@@ -597,6 +465,22 @@ Apply GET and POST requests fuzzing on /admin/index.php
 <pre><code>ffuf -w parameters.txt:FUZZ -u http://localhost/admin/index.php -X POST -d 'key=FUZZ' -H 'Content-Type: application/x-www-form-urlencoded'</code></pre>
 <button class="copy-button" onclick="copyToClipboard('ffuf -w parameters.txt:FUZZ -u http://localhost/admin/index.php -X POST -d 'key=FUZZ' -H 'Content-Type: application/x-www-form-urlencoded'')"></button>
 </div>
+
+
+Hint Acquisition about `/admin/flagvalue.php`:
+<div class="code-snippet">
+<pre><code>curl http://localhost/admin/flagvalue.php</code></pre>
+<button class="copy-button" onclick="copyToClipboard('curl http://localhost/admin/flagvalue.php')"></button>
+</div>
+
+Now you can see that we should use the [Value Fuzzing](#value-fuzzing). Use this method to gain access to `/admin/flagvalue.php` file.
+
+Correct command to list all IDs:
+<div class="code-snippet">
+<pre><code>ffuf -w ids.txt:FUZZ -u http://localhost/admin/flagvalue.php -X POST -d 'id=FUZZ' -H 'Content-Type: application/x-www-form-urlencoded'</code></pre>
+<button class="copy-button" onclick="copyToClipboard('ffuf -w ids.txt:FUZZ -u http://localhost/admin/flagvalue.php -X POST -d 'id=FUZZ' -H 'Content-Type: application/x-www-form-urlencoded')"></button>
+</div>
+
 
 Step 5: Advanced Testing Endpoints
 Test various accessible and inaccessible pages. Apply specialized testing techniques to different types of endpoints discovered in the application, including those that require authentication or specific headers.
