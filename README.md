@@ -100,7 +100,7 @@ Steps for installing and running the web application.
 ### Clone git repository
 Clone the project from the github repository to your direcotry on your linux machine using this command:
 <div class="code-snippet">
-<pre><code>sudo git clone https://github.com/nicolasbelz/webapp.git</code></pre>
+<pre><code>sudo git clone https://github.com/nicolasbelz/ffufapp.git</code></pre>
 <button class="copy-button" onclick="copyToClipboard('sudo git clone https://github.com/nicolasbelz/webapp.git')"></button>
 </div>
 
