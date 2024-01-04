@@ -1,4 +1,4 @@
-# Penetration Testing Techniques with ffuf lab
+# Laboratory for Penetration Testing Techniques with ffuf
 1. [Introduction](#introduction)
 2. [Requirements](#requirements)
    - [Update your machine](#update-your-machine)
